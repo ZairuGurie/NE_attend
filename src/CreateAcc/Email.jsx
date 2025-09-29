@@ -50,7 +50,7 @@ const Email = () => {
       <div style={styles.card}>
         <form onSubmit={handleNext} style={styles.form}>
           <div style={styles.fieldGroup}>
-            <label style={styles.label}>Email</label>
+            <label style={styles.label}>Emails</label>
             <input
               type="email"
               value={email}
