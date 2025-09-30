@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Email = () => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState('');
-
+  const navigate = useNavigate();
   const handleBack = () => {
     navigate(-1);
   };
 
-  const handleNext = async (e) => {
+  const handleNext = (e) => {
     e.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
@@ -17,147 +16,54 @@ const Email = () => {
       return;
     }
 
-    try {
-      const user_id = localStorage.getItem("user_id"); // from Step 1
-      const res = await fetch("http://localhost/NE_ATTEND/Backend/update_email.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id, email }),
-      });
-
-      const data = await res.json();
-      console.log(data);
-
-      if (data.message) {
-        navigate('/email/role'); // go to next step
-      } else {
-        alert(data.error || "Something went wrong");
-      }
-    } catch (err) {
-      console.error("Error:", err);
-      alert("Server error");
-    }
+    navigate('/email/role', { state: { email } });
   };
 
   return (
-    <div style={styles.screen}>
-      <div style={styles.title}>CREATE ACCOUNT</div>
+    <div className="min-h-screen w-screen flex items-center justify-center bg-white pt-0 relative box-border">
+      <div className="absolute left-1/2 text-3xl font-extrabold tracking-wide text-gray-900" style={{ top: 200, transform: 'translateX(-50%)' }}>
+        CREATE ACCOUNT
+      </div>
 
-      <button aria-label="Go back" onClick={handleBack} style={styles.backBtn}>
-        <span style={{ fontSize: 50 }}>←</span>
+      <button 
+        aria-label="Go back" 
+        onClick={handleBack} 
+        className="absolute left-[14%] rounded-lg border-0 bg-transparent text-gray-900 cursor-pointer"
+        style={{ top: 92 }}
+      >
+        <span className="text-5xl">←</span>
       </button>
 
-      <div style={styles.card}>
-        <form onSubmit={handleNext} style={styles.form}>
-          <div style={styles.fieldGroup}>
-            <label style={styles.label}>Emails</label>
+      <div className="w-[640px] max-w-[92vw] rounded-2xl px-12 py-10 text-white" style={{ background: '#201B51', boxShadow: '0 12px 32px rgba(0,0,0,0.10)' }}>
+        <div className="w-full">
+          <div className="flex flex-col">
+            <label className="text-sm italic mb-2.5" style={{ color: '#d7d8ff' }}>
+              Emails
+            </label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="example@email.com"
-              style={styles.input}
+              className="w-[100%] h-12 rounded-2xl border-0 outline-none px-4 text-base bg-white text-gray-900"
               required
             />
           </div>
 
-          <div style={styles.actionsRow}>
-            <button type="submit" style={styles.nextBtn}>
-              <span style={{ marginRight: 12, fontWeight: 700 }}>NEXT</span>
-              <span style={{ fontSize: 18 }}>→</span>
+          <div className="flex justify-end mt-7">
+            <button 
+              type="button"
+              onClick={handleNext}
+              className="inline-flex items-center justify-center px-5 py-3 rounded-3xl border-0 bg-black text-white font-bold tracking-wide cursor-pointer"
+            >
+              <span className="mr-3 font-bold">NEXT</span>
+              <span className="text-lg">→</span>
             </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
-};
-
-const styles = {
-  screen: {
-    minHeight: '100vh',
-    width: '100vw',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: '#ffffff',
-    paddingTop: 0,
-    position: 'relative',
-    boxSizing: 'border-box'
-  },
-  title: {
-    position: 'absolute',
-    top: 200,
-    left: '50%',
-    transform: 'translateX(-50%)',
-    fontSize: 28,
-    fontWeight: 800,
-    letterSpacing: 0.6,
-    color: '#111',
-    fontFamily: 'Segoe UI, Arial, sans-serif'
-  },
-  backBtn: {
-    position: 'absolute',
-    top: 92,
-    left: '14%',
-    borderRadius: 8,
-    border: 'none',
-    background: 'transparent',
-    color: '#111',
-    cursor: 'pointer',
-  },
-  card: {
-    width: 640,
-    maxWidth: '92vw',
-    background: '#201B51',
-    borderRadius: 16,
-    padding: '40px 48px',
-    boxShadow: '0 12px 32px rgba(0,0,0,0.10)',
-    color: '#fff'
-  },
-  form: {
-    width: '100%'
-  },
-  fieldGroup: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  label: {
-    fontSize: 14,
-    fontStyle: 'italic',
-    color: '#d7d8ff',
-    marginBottom: 10
-  },
-  input: {
-    width: '95%',
-    height: 48,
-    borderRadius: 14,
-    border: 'none',
-    outline: 'none',
-    padding: '0 16px',
-    fontSize: 16,
-    background: '#ffffff',
-    color: '#111'
-  },
-  actionsRow: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    marginTop: 28
-  },
-  nextBtn: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '12px 22px',
-    borderRadius: 22,
-    border: 'none',
-    background: '#10b981',
-    color: '#ffffff',
-    fontWeight: 700,
-    letterSpacing: 0.4,
-    cursor: 'pointer',
-    boxShadow: '0 6px 16px rgba(16,185,129,0.35)',
-  }
 };
 
 export default Email;

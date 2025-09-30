@@ -46,15 +46,7 @@ const Group = () => {
     setShowJoinModal(false);
   };
 
-  const dropdownItemStyle = {
-    padding: '10px 16px',
-    cursor: 'pointer',
-    fontSize: 15,
-    color: '#23225c',
-    fontWeight: 500,
-    borderBottom: '1px solid #eee',
-    background: '#fff'
-  };
+  const dropdownItemClass = 'px-4 py-2 cursor-pointer text-[15px] text-[#23225c] font-medium border-b border-[#eee] bg-white';
 
   const notificationItems = [
     'New assignment added in IT Elective.',
@@ -63,67 +55,53 @@ const Group = () => {
   ];
 
   return (
-    <div style={{ display: 'flex', width: '100vw', height: '100vh', fontFamily: 'Segoe UI, sans-serif', background: '#f4f6fb', overflow: 'hidden' }}>
-      <aside style={{ width: 290, background: '#201B51', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '40px 0', boxShadow: '2px 0 16px rgba(44,44,84,0.08)', height: '100vh' }}>
-        <img src={logo} alt="Logo" style={{ width: 300, height: 200, objectFit: 'contain', borderRadius: 18, boxShadow: '0 2px 8px rgba(0,0,0,0.10)', marginBottom: 60 }} />
-        <nav style={{ width: '100%' }}>
+    <div className="flex w-screen h-screen font-sans bg-[#f4f6fb] overflow-hidden">
+      <aside className="w-[290px] bg-[#201B51] text-white flex flex-col items-center py-10 shadow-[2px_0_16px_rgba(44,44,84,0.08)] h-screen">
+        <img src={logo} alt="Logo" className="w-[300px] h-[200px] object-contain rounded-[18px] shadow mb-[60px]" />
+        <nav className="w-full">
           {navItems.map((item, idx) => (
             <SidebarItem key={item.label} icon={item.icon} label={item.label} path={item.path} isActive={location.pathname === item.path} isLast={idx === navItems.length - 1} onClick={() => handleNavigation(item.path)} />
           ))}
         </nav>
       </aside>
 
-      <main style={{ flex: 1, padding: '48px 60px', height: '100vh', overflowY: 'auto', background: '#fff' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 36 }}>
-          <h2 style={{ margin: 0, fontWeight: 800, fontSize: 36, color: '#23225c' }}>GROUP</h2>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, position: 'relative' }}>
-            <div style={{ position: 'relative' }}>
-              <i className="bi bi-bell-fill" style={{ fontSize: 22, color: '#23225c', cursor: 'pointer' }} onClick={() => setShowNotifications(!showNotifications)}></i>
+      <main className="flex-1 px-[60px] py-12 h-screen overflow-y-auto bg-white">
+        <div className="flex justify-between items-center mb-9">
+          <h2 className="m-0 font-extrabold text-[36px] text-[#23225c]">GROUP</h2>
+          <div className="flex items-center gap-[14px] relative">
+            <div className="relative">
+              <i className="bi bi-bell-fill text-[22px] text-[#23225c] cursor-pointer" onClick={() => setShowNotifications(!showNotifications)}></i>
               {showNotifications && (
-                <div style={{ position: 'absolute', right: 0, top: '130%', background: '#fff', border: '1px solid #ccc', borderRadius: 10, boxShadow: '0 4px 8px rgba(0,0,0,0.1)', zIndex: 100, minWidth: 250 }}>
+                <div className="absolute right-0 top-[130%] bg-white border border-[#ccc] rounded-[10px] shadow z-[100] min-w-[250px]">
                   {notificationItems.map((note, idx) => (
-                    <div key={idx} style={{ padding: '10px 16px', fontSize: 14, color: '#23225c', borderBottom: '1px solid #eee' }}>{note}</div>
+                    <div key={idx} className="px-4 py-2 text-sm text-[#23225c] border-b border-[#eee]">{note}</div>
                   ))}
                 </div>
               )}
             </div>
-            <img src="https://i.abcnewsfe.com/a/0a1c6627-6fdd-4cc3-8edf-d80790509c5a/emoji-1-abc-221220_1671573538915_hpEmbed_1x1.jpg" alt="Profile" style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover' }} />
-            <div onClick={() => setShowDropdown(!showDropdown)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 16px', border: '1px solid #ccc', borderRadius: 20, background: 'black', cursor: 'pointer', fontWeight: 700, fontSize: 16, minWidth: 100, color: '#fff' }}>
+            <img src="https://i.abcnewsfe.com/a/0a1c6627-6fdd-4cc3-8edf-d80790509c5a/emoji-1-abc-221220_1671573538915_hpEmbed_1x1.jpg" alt="Profile" className="w-10 h-10 rounded-full object-cover" />
+            <div onClick={() => setShowDropdown(!showDropdown)} className="flex items-center gap-[10px] px-4 py-2 border border-[#ccc] rounded-[20px] bg-black cursor-pointer font-bold text-[16px] min-w-[100px] text-white">
               Student Name <i className="bi bi-caret-down-fill"></i>
             </div>
             {showDropdown && (
-              <div style={{ position: 'absolute', top: '100%', right: 0, background: '#fff', border: '1px solid #ccc', borderRadius: 10, boxShadow: '0 4px 8px rgba(0,0,0,0.1)', zIndex: 99, minWidth: 180 }}>
-                <div onClick={() => navigate('/profile')} style={dropdownItemStyle}>View Profile</div>
-                <div onClick={() => alert('Settings')} style={dropdownItemStyle}>Settings</div>
+              <div className="absolute top-full right-0 bg-white border border-[#ccc] rounded-[10px] shadow z-[99] min-w-[180px]">
+                <div onClick={() => navigate('/profile')} className={dropdownItemClass}>View Profile</div>
+                <div onClick={() => alert('Settings')} className={dropdownItemClass}>Settings</div>
               </div>
             )}
           </div>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 20 }}>
+        <div className="flex justify-end mb-5">
           <button 
             onClick={() => setShowJoinModal(true)} 
-            style={{ 
-              background: '#7CFC00', 
-              color: '#23225c', 
-              fontWeight: 700, 
-              fontSize: 16, 
-              padding: '10px 28px', 
-              borderRadius: 8, 
-              border: 'none', 
-              cursor: 'pointer', 
-              boxShadow: '0 2px 8px rgba(44,44,84,0.08)', 
-              letterSpacing: 1, 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: 8 
-            }}
+            className="bg-[#7CFC00] text-[#23225c] font-bold text-[16px] px-7 py-2.5 rounded-lg shadow tracking-[1px] flex items-center gap-2"
           >
-            REQUEST TO JOIN <span style={{ fontSize: 22, marginLeft: 6 }}>+</span>
+            REQUEST TO JOIN <span className="text-[22px] ml-1.5">+</span>
           </button>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 40 }}>
+        <div className="grid [grid-template-columns:repeat(auto-fill,minmax(280px,1fr))] gap-10">
           {groupCards.map((card, idx) => (
             <GroupCard key={idx} {...card} onDotsClick={() => setModalIdx(idx)} />
           ))}
@@ -133,116 +111,41 @@ const Group = () => {
         )}
 
         {showJoinModal && (
-          <div style={{ 
-            position: 'fixed', 
-            top: 0, 
-            left: 0, 
-            width: '100vw', 
-            height: '100vh', 
-            background: 'rgba(0,0,0,0.25)', 
-            zIndex: 9999, 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center' 
-          }}>
-            <div style={{ 
-              background: '#fff', 
-              borderRadius: 16, 
-              padding: 36, 
-              width: 400,
-              maxWidth: '90vw',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
-              position: 'relative'
-            }}>
+          <div className="fixed inset-0 bg-black/25 z-[9999] flex items-center justify-center">
+            <div className="bg-white rounded-[16px] p-9 w-[400px] max-w-[90vw] shadow-2xl relative">
               <button 
                 onClick={() => setShowJoinModal(false)} 
-                style={{ 
-                  position: 'absolute', 
-                  top: 18, 
-                  right: 18, 
-                  background: 'transparent', 
-                  border: 'none', 
-                  fontSize: 28, 
-                  color: '#232323', 
-                  cursor: 'pointer', 
-                  fontWeight: 700 
-                }}
+                className="absolute top-[18px] right-[18px] bg-transparent border-none text-[28px] text-[#232323] cursor-pointer font-bold"
               >
                 &times;
               </button>
-              <h2 style={{ 
-                margin: '0 0 24px 0', 
-                fontSize: 24, 
-                fontWeight: 700, 
-                color: 'black' 
-              }}>
+              <h2 className="m-0 mb-6 text-[24px] font-bold text-black">
                 Request to Join Group
               </h2>
               <form onSubmit={handleJoinRequest}>
-                <div style={{ marginBottom: 24 }}>
-                  <label 
-                    htmlFor="groupId" 
-                    style={{ 
-                      display: 'block', 
-                      marginBottom: 8, 
-                      fontSize: 15, 
-                      fontWeight: 600, 
-                      color: 'black' 
-                    }}
-                  >
-                    Enter Group ID
-                  </label>
+                <div className="mb-6">
+                  <label htmlFor="groupId" className="block mb-2 text-[15px] font-semibold text-black">Enter Group ID</label>
                   <input
                     id="groupId"
                     type="text"
                     value={groupId}
                     onChange={(e) => setGroupId(e.target.value)}
                     placeholder="abc-defg-hijk"
-                    style={{
-                      width: '85',
-                      padding: '12px 16px',
-                      fontSize: 16,
-                      border: '1px solid #ddd',
-                      borderRadius: 8,
-                      background: '#fff',
-                      color: 'black'
-                    }}
+                    className="w-full px-4 py-3 text-[16px] border border-[#ddd] rounded-lg bg-white text-black"
                     required
                   />
                 </div>
-                <div style={{ 
-                  display: 'flex', 
-                  gap: 12, 
-                  justifyContent: 'flex-end' 
-                }}>
+                <div className="flex gap-3 justify-end">
                   <button
                     type="button"
                     onClick={() => setShowJoinModal(false)}
-                    style={{
-                      padding: '10px 24px',
-                      border: 'none',
-                      borderRadius: 8,
-                      fontSize: 15,
-                      fontWeight: 600,
-                      background: '#ff4444',
-                      color: '#fff',
-                      cursor: 'pointer'
-                    }}
+                    className="px-6 py-2.5 rounded-lg text-[15px] font-semibold bg-[#ff4444] text-white cursor-pointer"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    style={{
-                      padding: '10px 24px',
-                      border: 'none',
-                      borderRadius: 8,
-                      fontSize: 15,
-                      fontWeight: 600,
-                      background: '#7CFC00',
-                      color: '#23225c',
-                      cursor: 'pointer'
-                    }}
+                    className="px-6 py-2.5 rounded-lg text-[15px] font-semibold bg-[#7CFC00] text-[#23225c] cursor-pointer"
                   >
                     Submit Request
                   </button>
@@ -259,32 +162,32 @@ const Group = () => {
 const SidebarItem = ({ icon, label, path, isActive, isLast, onClick }) => {
   const [hover, setHover] = React.useState(false);
   return (
-    <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onClick} style={{ display: 'flex', alignItems: 'center', padding: '18px 38px', cursor: 'pointer', fontWeight: 600, fontSize: 20, background: isActive ? '#35348a' : hover ? '#35348a' : 'transparent', marginBottom: isLast ? 0 : 12, borderTopLeftRadius: 30, borderBottomLeftRadius: 30, transition: 'background 0.2s' }}>
-      <i className={`bi ${icon}`} style={{ fontSize: 26, color: '#fff', marginRight: 22 }}></i>
-      <span style={{ fontStyle: 'italic', color: '#fff', letterSpacing: 1 }}>{label}</span>
+    <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onClick} className={`${(isActive || hover) ? 'bg-[#35348a]' : 'bg-transparent'} flex items-center px-[38px] py-[18px] cursor-pointer font-semibold text-[20px] ${isLast ? '' : 'mb-3'} rounded-tl-[30px] rounded-bl-[30px] transition-colors`}>
+      <i className={`bi ${icon} text-[26px] text-white mr-[22px]`}></i>
+      <span className="italic text-white tracking-[1px]">{label}</span>
     </div>
   );
 };
 
 const GroupCard = ({ title, instructor, time, members, onDotsClick }) => (
-  <div style={{ background: '#fff', borderRadius: 16, overflow: 'hidden', boxShadow: '0 2px 8px rgba(44,44,84,0.08)', minHeight: 220, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', width: '100%' }}>
-    <div style={{ background: '#23225c', padding: '20px 18px 10px 18px', borderTopLeftRadius: 16, borderTopRightRadius: 16 }}>
-      <div style={{ color: '#fff', fontWeight: 800, fontSize: 22, letterSpacing: 1, lineHeight: 1 }}>{title}</div>
-      <div style={{ fontWeight: 400, fontSize: 15, color: '#fff', marginTop: 6 }}>{instructor}</div>
+  <div className="bg-white rounded-[16px] overflow-hidden shadow min-h-[220px] flex flex-col justify-start w-full">
+    <div className="bg-[#23225c] pt-5 px-[18px] pb-2.5 rounded-t-[16px]">
+      <div className="text-white font-extrabold text-[22px] tracking-[1px] leading-none">{title}</div>
+      <div className="font-normal text-[15px] text-white mt-1.5">{instructor}</div>
     </div>
-    <div style={{ background: '#FFD600', padding: '18px', borderBottomLeftRadius: 16, borderBottomRightRadius: 16, display: 'flex', flexDirection: 'column', height: 120, justifyContent: 'space-between', position: 'relative' }}>
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-        <i className="bi bi-camera-video-fill" style={{ fontSize: 28, color: '#23225c', marginTop: 2 }}></i>
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <span style={{ fontWeight: 700, fontSize: 16, color: '#23225c', lineHeight: 1 }}>{title}</span>
-          <span style={{ fontWeight: 500, fontSize: 13, color: '#23225c', marginTop: 2 }}>{time}</span>
+    <div className="bg-[#FFD600] p-[18px] rounded-b-[16px] flex flex-col h-[120px] justify-between relative">
+      <div className="flex items-start gap-3">
+        <i className="bi bi-camera-video-fill text-[28px] text-[#23225c] mt-0.5"></i>
+        <div className="flex flex-col justify-center">
+          <span className="font-bold text-[16px] text-[#23225c] leading-none">{title}</span>
+          <span className="font-medium text-[13px] text-[#23225c] mt-0.5">{time}</span>
         </div>
       </div>
-      <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', width: '100%' }}>
-        <i className="bi bi-three-dots" style={{ fontSize: 24, color: '#23225c', opacity: 0.8, cursor: 'pointer' }} onClick={onDotsClick}></i>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <i className="bi bi-people-fill" style={{ fontSize: 28, color: '#23225c' }}></i>
-          <span style={{ fontWeight: 700, fontSize: 20, color: '#23225c' }}>{members}</span>
+      <div className="flex items-end justify-between w-full">
+        <i className="bi bi-three-dots text-[24px] text-[#23225c] opacity-80 cursor-pointer" onClick={onDotsClick}></i>
+        <div className="flex items-center gap-1.5">
+          <i className="bi bi-people-fill text-[28px] text-[#23225c]"></i>
+          <span className="font-bold text-[20px] text-[#23225c]">{members}</span>
         </div>
       </div>
     </div>
@@ -292,11 +195,11 @@ const GroupCard = ({ title, instructor, time, members, onDotsClick }) => (
 );
 
 const GroupDetailsModal = ({ card, onClose }) => (
-  <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.25)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <div style={{ background: '#fff', border: '1px solid #232323', borderRadius: 6, padding: 36, minWidth: 420, maxWidth: 600, width: '90vw', boxShadow: '0 8px 32px rgba(0,0,0,0.18)', position: 'relative' }}>
-      <button onClick={onClose} style={{ position: 'absolute', top: 18, right: 18, background: 'transparent', border: 'none', fontSize: 28, color: '#232323', cursor: 'pointer', fontWeight: 700 }}>&times;</button>
-      <div style={{ fontStyle: 'italic', fontWeight: 700, fontSize: 32, marginBottom: 18, color: 'black' }}>DETAILS</div>
-      <div style={{ display: 'grid', gridTemplateColumns: '180px 1fr', rowGap: 14, columnGap: 18, fontSize: 20, marginBottom: 36, color: "Black" }}>
+  <div className="fixed inset-0 bg-black/25 z-[9999] flex items-center justify-center">
+    <div className="bg-white border border-[#232323] rounded p-9 min-w-[420px] max-w-[600px] w-[90vw] shadow-2xl relative">
+      <button onClick={onClose} className="absolute top-[18px] right-[18px] bg-transparent border-none text-[28px] text-[#232323] cursor-pointer font-bold">&times;</button>
+      <div className="italic font-bold text-[32px] mb-[18px] text-black">DETAILS</div>
+      <div className="grid [grid-template-columns:180px_1fr] gap-y-[14px] gap-x-[18px] text-[20px] mb-9 text-black">
         <div>Group Name:</div><div>{card.title}</div>
         <div>Schedule:</div><div>{card.time}</div>
         <div>Time Duration:</div><div>{card.duration || '1 hour'}</div>
@@ -304,8 +207,8 @@ const GroupDetailsModal = ({ card, onClose }) => (
         <div>Section:</div><div>{card.section || 'IT3R10'}</div>
         <div>SUBJECT ID:</div><div>{card.subjectId || '1234567889'}</div>
       </div>
-      <div style={{ fontStyle: 'italic', fontWeight: 700, fontSize: 24, marginBottom: 10, color: 'black' }}>Your Record</div>
-      <div style={{ display: 'grid', gridTemplateColumns: '120px 1fr', rowGap: 10, fontSize: 19, color: 'black' }}>
+      <div className="italic font-bold text-[24px] mb-2.5 text-black">Your Record</div>
+      <div className="grid [grid-template-columns:120px_1fr] gap-y-2.5 text-[19px] text-black">
         <div>Present:</div><div>{card.present ?? 23}</div>
         <div>Absent:</div><div>{card.absent ?? 2}</div>
         <div>Late:</div><div>{card.late ?? 9}</div>

@@ -3,130 +3,67 @@ import { useNavigate } from 'react-router-dom';
 
 const Confirm = () => {
   const navigate = useNavigate();
-
   const handleConfirm = () => {
-    // Redirect user after confirmation
-    navigate('/login'); // adjust route to where user should go next
+    // Simulate navigation to login
+    console.log('Navigating to login...');
+    alert('Account created successfully! Redirecting to login...');
+    navigate('/confirm/login');
   };
 
   const handleBack = () => {
-    navigate(-1);
+    window.history.back();
   };
 
   return (
-    <div style={styles.screen}>
-      <div style={styles.title}>CREATE ACCOUNT</div>
+    <div className="min-h-screen w-screen flex items-center justify-center bg-white pt-0 relative box-border">
+      <div 
+        className="absolute top-[120px] left-1/2 -translate-x-1/2 text-2xl font-extrabold text-[#111]"
+        style={{ letterSpacing: '0.6px', fontFamily: 'Segoe UI, Arial, sans-serif' }}
+      >
+        CREATE ACCOUNT
+      </div>
 
-      <button aria-label="Go back" onClick={handleBack} style={styles.backBtn}>
-        <span style={{ fontSize: 40 }}>←</span>
+      <button 
+        aria-label="Go back" 
+        onClick={handleBack} 
+        className="absolute  top-[92px] left-[14%] text-black"
+      >
+        <span className="text-[40px]">←</span>
       </button>
 
-      <div style={styles.card}>
-        <h3 style={styles.subtitle}>ACCOUNT CREATED</h3>
-        <h1 style={styles.success}>SUCCESSFULLY</h1>
+      <div 
+        className="w-[480px] max-w-[90vw] bg-[#1E1A50] rounded-2xl px-8 py-10 text-center text-white"
+        style={{ boxShadow: '0 12px 32px rgba(0,0,0,0.15)' }}
+      >
+        <h3 
+          className="text-base font-semibold mb-1 text-white"
+          style={{ letterSpacing: '0.6px' }}
+        >
+          ACCOUNT CREATED
+        </h3>
+        <h1 
+          className="text-[28px] font-extrabold mb-6 text-white"
+          style={{ letterSpacing: '0.8px' }}
+        >
+          SUCCESSFULLY
+        </h1>
 
         {/* Checkmark */}
-        <div style={styles.checkCircle}>
-          <span style={styles.checkMark}>✔</span>
+        <div className="w-[120px] h-[120px] rounded-full bg-[#10b981] flex items-center justify-center mx-auto mb-8">
+          <span className="text-[60px] font-bold text-[#111]">✔</span>
         </div>
 
-        <div style={styles.actionsRow}>
-          <button onClick={handleConfirm} style={styles.confirmBtn}>
+        <div className="flex justify-end">
+          <button 
+            onClick={handleConfirm} 
+            className="px-6 py-2.5 rounded-[22px] border-none bg-[#10b981] text-[#111] italic font-medium cursor-pointer text-sm"
+          >
             Confirm
           </button>
         </div>
       </div>
     </div>
   );
-};
-
-const styles = {
-  screen: {
-    minHeight: '100vh',
-    width: '100vw',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: '#ffffff',
-    paddingTop: 0,
-    position: 'relative',
-    boxSizing: 'border-box'
-  },
-  title: {
-    position: 'absolute',
-    top: 120,
-    left: '50%',
-    transform: 'translateX(-50%)',
-    fontSize: 24,
-    fontWeight: 800,
-    letterSpacing: 0.6,
-    color: '#111',
-    fontFamily: 'Segoe UI, Arial, sans-serif',
-  },
-  backBtn: {
-    position: 'absolute',
-    top: 92,
-    left: '14%',
-    borderRadius: 8,
-    border: 'none',
-    background: 'transparent',
-    color: '#111',
-    cursor: 'pointer',
-  },
-  card: {
-    width: 480,
-    maxWidth: '90vw',
-    background: '#1E1A50',
-    borderRadius: 16,
-    padding: '40px 30px',
-    boxShadow: '0 12px 32px rgba(0,0,0,0.15)',
-    textAlign: 'center',
-    color: '#fff',
-  },
-  subtitle: {
-    fontSize: 16,
-    fontWeight: 600,
-    marginBottom: 4,
-    color: '#fff',
-    letterSpacing: 0.6,
-  },
-  success: {
-    fontSize: 28,
-    fontWeight: 800,
-    marginBottom: 24,
-    color: '#fff',
-    letterSpacing: 0.8,
-  },
-  checkCircle: {
-    width: 120,
-    height: 120,
-    borderRadius: '50%',
-    background: '#10b981',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: '0 auto 30px auto',
-  },
-  checkMark: {
-    fontSize: 60,
-    fontWeight: 700,
-    color: '#111',
-  },
-  actionsRow: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-  },
-  confirmBtn: {
-    padding: '10px 24px',
-    borderRadius: 22,
-    border: 'none',
-    background: '#10b981',
-    color: '#111',
-    fontStyle: 'italic',
-    fontWeight: 500,
-    cursor: 'pointer',
-    fontSize: 14,
-  }
 };
 
 export default Confirm;

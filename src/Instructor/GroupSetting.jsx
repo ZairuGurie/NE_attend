@@ -47,71 +47,56 @@ const GroupSettings = () => {
   };
 
   return (
-    <div style={styles.modalOverlay}>
-      <div style={styles.modalContent}>
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000]">
+      <div className="bg-white rounded-[16px] w-[90%] max-w-[800px] max-h-[90vh] overflow-y-auto px-10 py-8">
         {/* Header */}
-        <div style={styles.header}>
-          <div style={styles.backButton} onClick={() => navigate('/Group2')}>
-            <i className="bi bi-arrow-left" style={{ fontSize: 24 }}></i>
+        <div className="flex items-center mb-8">
+          <div className="mr-6 text-black cursor-pointer" onClick={() => navigate('/Group2')}>
+            <i className="bi bi-arrow-left text-[24px]"></i>
           </div>
-          <h2 style={styles.title}>GROUP SETTINGS</h2>
+          <h2 className="m-0 text-[28px] font-extrabold text-black">GROUP SETTINGS</h2>
           <button 
             onClick={() => isEditing ? handleSaveChanges() : setIsEditing(true)}
-            style={{
-              ...styles.editButton,
-              backgroundColor: isEditing ? '#7CFC00' : '#23225c'
-            }}
+            className={`ml-auto px-5 py-2 rounded-lg text-white text-[14px] font-semibold ${isEditing ? 'bg-[#7CFC00] text-black' : 'bg-[#23225c]'}`}
           >
             {isEditing ? 'Save Changes' : 'Edit Group'}
           </button>
         </div>
 
         {/* Form */}
-        <div style={styles.formContainer}>
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>GROUP NAME</label>
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-2">
+            <label className="text-[14px] font-semibold text-black">GROUP NAME</label>
             <input 
               type="text"
               name="groupName"
               value={formData.groupName}
               onChange={handleInputChange}
-              style={{
-                ...styles.input,
-                backgroundColor: isEditing ? '#fff' : '#f5f5f5',
-                cursor: isEditing ? 'text' : 'default'
-              }}
               readOnly={!isEditing}
+              className={`px-4 py-3 rounded-lg border border-[#ddd] text-[16px] ${isEditing ? 'bg-white cursor-text' : 'bg-[#f5f5f5] cursor-default'} text-black`}
             />
           </div>
 
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>TIME SCHEDULE</label>
+          <div className="flex flex-col gap-2">
+            <label className="text-[14px] font-semibold text-black">TIME SCHEDULE</label>
             <input 
               type="time"
               name="timeSchedule"
               value={formData.timeSchedule}
               onChange={handleInputChange}
-              style={{
-                ...styles.input,
-                backgroundColor: isEditing ? '#fff' : '#f5f5f5',
-                cursor: isEditing ? 'text' : 'default'
-              }}
               readOnly={!isEditing}
+              className={`px-4 py-3 rounded-lg border border-[#ddd] text-[16px] ${isEditing ? 'bg-white cursor-text' : 'bg-[#f5f5f5] cursor-default'} text-black`}
             />
           </div>
 
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>DAY</label>
+          <div className="flex flex-col gap-2">
+            <label className="text-[14px] font-semibold text-black">DAY</label>
             <select 
               name="day"
               value={formData.day}
               onChange={handleInputChange}
-              style={{
-                ...styles.select,
-                backgroundColor: isEditing ? '#fff' : '#f5f5f5',
-                cursor: isEditing ? 'pointer' : 'default'
-              }}
               disabled={!isEditing}
+              className={`px-4 py-3 rounded-lg border border-[#ddd] text-[16px] ${isEditing ? 'bg-white cursor-pointer' : 'bg-[#f5f5f5] cursor-default'} text-black`}
             >
               <option value="">Select Day</option>
               <option value="monday">Monday</option>
@@ -122,83 +107,67 @@ const GroupSettings = () => {
             </select>
           </div>
 
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>MEETING LINK</label>
+          <div className="flex flex-col gap-2">
+            <label className="text-[14px] font-semibold text-black">MEETING LINK</label>
             <input 
               type="text"
               name="meetingLink"
               value={formData.meetingLink}
               onChange={handleInputChange}
-              style={{
-                ...styles.input,
-                backgroundColor: isEditing ? '#fff' : '#f5f5f5',
-                cursor: isEditing ? 'text' : 'default'
-              }}
               readOnly={!isEditing}
+              className={`px-4 py-3 rounded-lg border border-[#ddd] text-[16px] ${isEditing ? 'bg-white cursor-text' : 'bg-[#f5f5f5] cursor-default'} text-black`}
             />
           </div>
 
-          <div style={styles.rowContainer}>
-            <div style={styles.halfWidth}>
-              <label style={styles.label}>LATE RULE TIME</label>
+          <div className="grid grid-cols-2 gap-6">
+            <div className="flex flex-col gap-2">
+              <label className="text-[14px] font-semibold text-black">LATE RULE TIME</label>
               <select 
                 name="lateRuleTime"
                 value={formData.lateRuleTime}
                 onChange={handleInputChange}
-                style={{
-                  ...styles.select,
-                  backgroundColor: isEditing ? '#fff' : '#f5f5f5',
-                  cursor: isEditing ? 'pointer' : 'default'
-                }}
                 disabled={!isEditing}
+                className={`px-4 py-3 rounded-lg border border-[#ddd] text-[16px] ${isEditing ? 'bg-white cursor-pointer' : 'bg-[#f5f5f5] cursor-default'} text-black`}
               >
                 <option value="15">15 minutes</option>
                 <option value="30">30 minutes</option>
                 <option value="45">45 minutes</option>
               </select>
             </div>
-            <div style={styles.halfWidth}>
-              <label style={styles.label}>SECTION</label>
+            <div className="flex flex-col gap-2">
+              <label className="text-[14px] font-semibold text-black">SECTION</label>
               <input 
                 type="text"
                 name="section"
                 value={formData.section}
                 onChange={handleInputChange}
-                style={{
-                  ...styles.input,
-                  backgroundColor: isEditing ? '#fff' : '#f5f5f5',
-                  cursor: isEditing ? 'text' : 'default'
-                }}
                 readOnly={!isEditing}
+                className={`px-4 py-3 rounded-lg border border-[#ddd] text-[16px] ${isEditing ? 'bg-white cursor-text' : 'bg-[#f5f5f5] cursor-default'} text-black`}
               />
             </div>
           </div>
 
-          <div style={styles.inputGroup}>
-            <div style={styles.memberHeader}>
-              <label style={styles.label}>MEMBER</label>
+          <div className="flex flex-col">
+            <div className="flex justify-between items-center mb-4">
+              <label className="text-[14px] font-semibold text-black">MEMBER</label>
               <button 
                 type="button"
                 onClick={handleInvite}
-                style={{
-                  ...styles.inviteButton,
-                  opacity: isEditing ? 1 : 0.5,
-                  cursor: isEditing ? 'pointer' : 'not-allowed'
-                }}
                 disabled={!isEditing}
+                className={`px-6 py-2 rounded-lg text-[15px] font-semibold ${isEditing ? 'bg-[#7CFC00] text-black cursor-pointer' : 'bg-[#7CFC00] text-black opacity-50 cursor-not-allowed'}`}
               >
                 Invite
               </button>
             </div>
-            <div style={styles.memberList}>
+            <div className="border border-[#ddd] rounded-lg max-h-[200px] overflow-y-auto">
               {members.map((email, idx) => (
-                <div key={idx} style={styles.memberItem}>
-                  <div style={styles.memberAvatar}>
+                <div key={idx} className="px-4 py-3 flex items-center gap-3 border-b border-[#eee]">
+                  <div className="w-8 h-8 rounded-full bg-[#f0f0f0] flex items-center justify-center">
                     <i className="bi bi-person-fill"></i>
                   </div>
-                  <span style={styles.memberEmail}>{email}</span>
+                  <span className="text-[15px] text-black">{email}</span>
                   {isEditing && (
-                    <button style={styles.removeButton}>
+                    <button className="ml-auto text-[#ff4444] p-1">
                       <i className="bi bi-x-lg"></i>
                     </button>
                   )}
@@ -207,23 +176,19 @@ const GroupSettings = () => {
             </div>
           </div>
 
-          <div style={styles.buttonContainer}>
+          <div className="flex justify-between mt-8">
             <button 
               type="button"
               onClick={handleDeleteGroup}
-              style={{
-                ...styles.deleteButton,
-                opacity: isEditing ? 1 : 0.5,
-                cursor: isEditing ? 'pointer' : 'not-allowed'
-              }}
               disabled={!isEditing}
+              className={`px-6 py-3 rounded-lg text-white text-[15px] font-semibold w-[200px] ${isEditing ? 'bg-[#ff4444] cursor-pointer' : 'bg-[#ff4444] opacity-50 cursor-not-allowed'}`}
             >
               DELETE Group
             </button>
             <button
               type="button"
               onClick={() => navigate('/Group2')}
-              style={styles.startButton}
+              className="px-6 py-3 rounded-lg bg-[#7CFC00] text-black text-[15px] font-semibold"
             >
               Start Session
             </button>
@@ -234,184 +199,6 @@ const GroupSettings = () => {
   );
 };
 
-const styles = {
-  modalOverlay: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 1000
-  },
-  modalContent: {
-    backgroundColor: '#fff',
-    borderRadius: 16,
-    width: '90%',
-    maxWidth: 800,
-    maxHeight: '90vh',
-    overflowY: 'auto',
-    padding: '32px 40px'
-  },
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-    marginBottom: 32
-  },
-  backButton: {
-    cursor: 'pointer',
-    marginRight: 24,
-    color: 'black' // Changed from '#23225c'
-  },
-  title: {
-    margin: 0,
-    fontSize: 28,
-    fontWeight: 800,
-    color: 'black' // Changed from '#23225c'
-  },
-  formContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 24
-  },
-  inputGroup: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 8
-  },
-  label: {
-    fontSize: 14,
-    fontWeight: 600,
-    color: 'black' // Changed from '#23225c'
-  },
-  input: {
-    padding: '12px 16px',
-    borderRadius: 8,
-    border: '1px solid #ddd',
-    fontSize: 16,
-    color: 'black' // Added color
-  },
-  rowContainer: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    gap: 24
-  },
-  halfWidth: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 8
-  },
-  select: {
-    padding: '12px 16px',
-    borderRadius: 8,
-    border: '1px solid #ddd',
-    fontSize: 16,
-    backgroundColor: '#fff',
-    color: 'black' // Added color
-  },
-  memberHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 16
-  },
-  inviteButton: {
-    backgroundColor: '#7CFC00',
-    color: 'black', // Changed from '#23225c'
-    border: 'none',
-    padding: '8px 24px',
-    borderRadius: 8,
-    fontSize: 15,
-    fontWeight: 600,
-    cursor: 'pointer'
-  },
-  memberList: {
-    border: '1px solid #ddd',
-    borderRadius: 8,
-    maxHeight: 200,
-    overflowY: 'auto'
-  },
-  memberItem: {
-    padding: '12px 16px',
-    display: 'flex',
-    alignItems: 'center',
-    gap: 12,
-    borderBottom: '1px solid #eee'
-  },
-  memberAvatar: {
-    width: 32,
-    height: 32,
-    borderRadius: '50%',
-    backgroundColor: '#f0f0f0',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  memberEmail: {
-    fontSize: 15,
-    color: 'black' // Changed from '#333'
-  },
-  buttonContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginTop: 32
-  },
-  rightButtons: {
-    display: 'flex',
-    gap: 16
-  },
-  deleteButton: {
-    padding: '12px 24px',
-    backgroundColor: '#ff4444',
-    color: '#fff',
-    border: 'none',
-    borderRadius: 8,
-    fontSize: 15,
-    fontWeight: 600,
-    cursor: 'pointer',
-    width: '200px'
-  },
-  saveButton: {
-    padding: '12px 24px',
-    backgroundColor: '#23225c',
-    color: '#fff',
-    border: 'none',
-    borderRadius: 8,
-    fontSize: 15,
-    fontWeight: 600,
-    cursor: 'pointer'
-  },
-  startButton: {
-    padding: '12px 24px',
-    backgroundColor: '#7CFC00',
-    color: 'black', // Changed from '#23225c'
-    border: 'none',
-    borderRadius: 8,
-    fontSize: 15,
-    fontWeight: 600,
-    cursor: 'pointer'
-  },
-  editButton: {
-    padding: '8px 20px',
-    color: '#fff',
-    border: 'none',
-    borderRadius: 8,
-    fontSize: 14,
-    fontWeight: 600,
-    cursor: 'pointer',
-    marginLeft: 'auto'
-  },
-  removeButton: {
-    background: 'none',
-    border: 'none',
-    color: '#ff4444',
-    cursor: 'pointer',
-    marginLeft: 'auto',
-    padding: 4
-  }
-};
+
 
 export default GroupSettings;

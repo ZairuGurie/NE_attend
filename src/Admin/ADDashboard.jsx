@@ -25,29 +25,29 @@ const ADDashboard = () => {
   };
 
   return (
-    <div style={styles.mainContainer}>
+    <div className="min-h-screen w-screen bg-[#f4f6fb] font-sans flex flex-col overflow-hidden">
       {/* Header */}
-      <div style={styles.header}>
-        <img src={logo} alt="NE ATTEND Logo" style={styles.logo} />
-        <div style={styles.adminControls}>
-          <span style={styles.adminText}>ADMIN</span>
-          <button onClick={handleLogout} style={styles.logoutButton}>
-            <i className="bi bi-box-arrow-right" style={{ marginRight: 8 }}></i>
+      <div className="bg-[#23225c] px-10 py-5 flex justify-between items-center shadow">
+        <img src={logo} alt="NE ATTEND Logo" className="h-[60px] w-auto" />
+        <div className="flex items-center gap-6">
+          <span className="text-white text-[24px] font-bold tracking-[0.5px]">ADMIN</span>
+          <button onClick={handleLogout} className="flex items-center px-5 py-2 bg-transparent border-2 border-white rounded-lg text-white text-[16px] font-semibold">
+            <i className="bi bi-box-arrow-right mr-2"></i>
             LOGOUT
           </button>
         </div>
       </div>
 
       {/* Content Container */}
-      <div style={styles.contentContainer}>
+      <div className="p-10 flex gap-10 flex-1 overflow-y-auto h-[calc(100vh-100px)]">
         {/* User Management Section */}
-        <div style={styles.userManagementSection}>
-          <div style={styles.sectionHeader}>
-            <h2 style={styles.sectionTitle}>User Management</h2>
+        <div className="flex-2 flex flex-col min-w-0">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-[24px] font-bold text-[#23225c] m-0 tracking-[0.5px]">User Management</h2>
             <select 
               value={selectedUserType}
               onChange={(e) => setSelectedUserType(e.target.value)}
-              style={styles.userTypeSelect}
+              className="px-5 py-2 text-[16px] rounded-lg border border-[#ddd] bg-white text-[#23225c] cursor-pointer"
             >
               <option value="STUDENT">STUDENT</option>
               <option value="INSTRUCTOR">INSTRUCTOR</option>
@@ -55,32 +55,32 @@ const ADDashboard = () => {
           </div>
 
           {/* Users Table */}
-          <div style={styles.tableWrapper}>
-            <table style={styles.table}>
+          <div className="bg-white rounded-[16px] p-6 shadow overflow-x-auto max-h-[calc(100vh-280px)] min-h-[200px]">
+            <table className="w-full border-collapse min-w-[800px]">
               <thead>
-                <tr>
-                  <th style={styles.th}>User ID</th>
-                  <th style={styles.th}>User Name</th>
-                  <th style={styles.th}>User Role</th>
-                  <th style={styles.th}>Email</th>
-                  <th style={styles.th}>Department</th>
-                  <th style={styles.th}>Actions</th>
+                <tr className="bg-[#f8f9fa] text-[#23225c] border-b-2 border-[#eee]">
+                  <th className="text-left px-5 py-4 font-bold text-[15px]">User ID</th>
+                  <th className="text-left px-5 py-4 font-bold text-[15px]">User Name</th>
+                  <th className="text-left px-5 py-4 font-bold text-[15px]">User Role</th>
+                  <th className="text-left px-5 py-4 font-bold text-[15px]">Email</th>
+                  <th className="text-left px-5 py-4 font-bold text-[15px]">Department</th>
+                  <th className="text-left px-5 py-4 font-bold text-[15px]">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {users.map((user, index) => (
-                  <tr key={index} style={styles.tr}>
-                    <td style={styles.td}>{user.id}</td>
-                    <td style={styles.td}>{user.name}</td>
-                    <td style={styles.td}>{user.role}</td>
-                    <td style={styles.td}>{user.email}</td>
-                    <td style={styles.td}>{user.department}</td>
-                    <td style={styles.td}>
-                      <div style={styles.actionButtons}>
-                        <button style={styles.editButton}>
+                  <tr key={index} className="border-b border-[#eee]">
+                    <td className="px-5 py-4 text-[15px] text-[#444]">{user.id}</td>
+                    <td className="px-5 py-4 text-[15px] text-[#444]">{user.name}</td>
+                    <td className="px-5 py-4 text-[15px] text-[#444]">{user.role}</td>
+                    <td className="px-5 py-4 text-[15px] text-[#444]">{user.email}</td>
+                    <td className="px-5 py-4 text-[15px] text-[#444]">{user.department}</td>
+                    <td className="px-5 py-4">
+                      <div className="flex gap-2">
+                        <button className="px-3 py-2 bg-[#23225c] text-white rounded"> 
                           <i className="bi bi-pencil-fill"></i>
                         </button>
-                        <button style={styles.deleteButton}>
+                        <button className="px-3 py-2 bg-[#ff4444] text-white rounded">
                           <i className="bi bi-trash-fill"></i>
                         </button>
                       </div>
@@ -93,44 +93,39 @@ const ADDashboard = () => {
         </div>
 
         {/* Rules Section */}
-        <div style={styles.rulesSection}>
-          <h3 style={styles.ruleTitle}>Set Rule</h3>
+        <div className="flex-1 bg-white rounded-[16px] p-7 h-fit shadow min-w-[300px] max-h-[calc(100vh-180px)] overflow-y-auto">
+          <h3 className="text-[20px] font-bold text-[#23225c] mb-6 tracking-[0.5px]">Set Rule</h3>
           
-          <div style={styles.ruleForm}>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Absent Rule</label>
-              <select style={styles.select}>
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-2">
+              <label className="text-[15px] font-semibold text-[#23225c]">Absent Rule</label>
+              <select className="px-4 py-3 text-[15px] rounded-lg border border-[#ddd] bg-white text-[#23225c] cursor-pointer">
                 <option>3 consecutive absent = D/F</option>
               </select>
             </div>
 
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Late Rule</label>
-              <select style={styles.select}>
+            <div className="flex flex-col gap-2">
+              <label className="text-[15px] font-semibold text-[#23225c]">Late Rule</label>
+              <select className="px-4 py-3 text-[15px] rounded-lg border border-[#ddd] bg-white text-[#23225c] cursor-pointer">
                 <option>3 consecutive Late = 1 Absent</option>
               </select>
             </div>
 
-            <div style={styles.formGroup}>
-              <label style={styles.label}>NOTIFY STUDENT</label>
-              <div style={styles.notifyCheckbox}>
-                <input type="checkbox" id="notifyStudent" />
-                <label htmlFor="notifyStudent">Send notifications to students</label>
+            <div className="flex flex-col gap-2">
+              <label className="text-[15px] font-semibold text-[#23225c]">NOTIFY STUDENT</label>
+              <label className="flex items-center gap-2 text-[#444]"><input type="checkbox" id="notifyStudent" />Send notifications to students</label>
+            </div>
+
+            <div className="bg-[#f8f9fa] p-6 rounded-[12px] border border-[#eee]">
+              <h4 className="text-[17px] font-bold text-[#23225c] mb-4 tracking-[0.5px]">Policy note</h4>
+              <div className="flex flex-col gap-3">
+                <p className="text-[15px] text-[#444] m-0">• 3 Lates = 1 Absent</p>
+                <p className="text-[15px] text-[#444] m-0">• 3 Consecutive Absent = D/F</p>
+                <p className="text-[15px] text-[#444] m-0">Student must follow the rules. The participation will reflect their performance.</p>
               </div>
             </div>
 
-            <div style={styles.policyNote}>
-              <h4 style={styles.policyTitle}>Policy note</h4>
-              <div style={styles.policyList}>
-                <p style={styles.policyText}>• 3 Lates = 1 Absent</p>
-                <p style={styles.policyText}>• 3 Consecutive Absent = D/F</p>
-                <p style={styles.policyText}>
-                  Student must follow the rules. The participation will reflect their performance.
-                </p>
-              </div>
-            </div>
-
-            <button style={styles.postButton}>Post</button>
+            <button className="px-6 py-3 bg-[#23225c] text-white rounded-lg text-[16px] font-semibold self-end mt-4 shadow">Post</button>
           </div>
         </div>
       </div>

@@ -11,15 +11,7 @@ const navItems = [
   { icon: 'bi-box-arrow-right', label: 'LOGOUT', path: '/logout' },
 ];
 
-const dropdownItemStyle = {
-  padding: '10px 16px',
-  cursor: 'pointer',
-  fontSize: 15,
-  color: '#23225c',
-  fontWeight: 500,
-  borderBottom: '1px solid #eee',
-  background: '#fff',
-};
+const dropdownItemClass = 'px-4 py-2 cursor-pointer text-[15px] text-[#23225c] font-medium border-b border-[#eee] bg-white';
 
 const inputStyle = {
   width: '100%',
@@ -100,11 +92,11 @@ const Notes = () => {
     new Date(rawDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
   return (
-    <div style={{ display: 'flex', width: '100vw', height: '100vh', fontFamily: 'Segoe UI, sans-serif', background: '#f4f6fb', overflow: 'hidden' }}>
+    <div className="flex w-screen h-screen font-sans bg-[#f4f6fb] overflow-hidden">
       {/* Sidebar */}
-      <aside style={{ width: 290, background: '#201B51', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '40px 0', boxShadow: '2px 0 16px rgba(44,44,84,0.08)', height: '100vh' }}>
-        <img src={logo} alt="Logo" style={{ width: 300, height: 200, objectFit: 'contain', borderRadius: 18, boxShadow: '0 2px 8px rgba(0,0,0,0.10)', marginBottom: 60 }} />
-        <nav style={{ width: '100%' }}>
+      <aside className="w-[290px] bg-[#201B51] text-white flex flex-col items-center py-10 shadow-[2px_0_16px_rgba(44,44,84,0.08)] h-screen">
+        <img src={logo} alt="Logo" className="w-[300px] h-[200px] object-contain rounded-[18px] shadow mb-[60px]" />
+        <nav className="w-full">
           {navItems.map((item, idx) => (
             <SidebarItem key={item.label} icon={item.icon} label={item.label} path={item.path} isActive={location.pathname === item.path} isLast={idx === navItems.length - 1} onClick={() => handleNavigation(item.path)} />
           ))}
@@ -112,68 +104,68 @@ const Notes = () => {
       </aside>
 
       {/* Main */}
-      <main style={{ flex: 1, padding: '48px 60px', height: '100vh', overflowY: 'auto' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 36 }}>
-          <h2 style={{ margin: 0, fontWeight: 800, fontSize: 36, color: '#23225c' }}>GROUP</h2>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, position: 'relative' }}>
-            <div style={{ position: 'relative' }}>
-              <i className="bi bi-bell-fill" style={{ fontSize: 22, color: '#23225c', cursor: 'pointer' }} onClick={() => setShowNotifications(!showNotifications)}></i>
+      <main className="flex-1 px-[60px] py-12 h-screen overflow-y-auto">
+      <div className="flex justify-between items-center mb-9">
+          <h2 className="m-0 font-extrabold text-[36px] text-[#23225c]">GROUP</h2>
+          <div className="flex items-center gap-[14px] relative">
+            <div className="relative">
+              <i className="bi bi-bell-fill text-[22px] text-[#23225c] cursor-pointer" onClick={() => setShowNotifications(!showNotifications)}></i>
               {showNotifications && (
-                <div style={{ position: 'absolute', right: 0, top: '130%', background: '#fff', border: '1px solid #ccc', borderRadius: 10, boxShadow: '0 4px 8px rgba(0,0,0,0.1)', zIndex: 100, minWidth: 250 }}>
+                <div className="absolute right-0 top-[130%] bg-white border border-[#ccc] rounded-[10px] shadow z-[100] min-w-[250px]">
                   {notificationItems.map((note, idx) => (
-                    <div key={idx} style={{ padding: '10px 16px', fontSize: 14, color: '#23225c', borderBottom: '1px solid #eee' }}>{note}</div>
+                    <div key={idx} className="px-4 py-2 text-sm text-[#23225c] border-b border-[#eee]">{note}</div>
                   ))}
                 </div>
               )}
             </div>
-            <img src="https://i.abcnewsfe.com/a/0a1c6627-6fdd-4cc3-8edf-d80790509c5a/emoji-1-abc-221220_1671573538915_hpEmbed_1x1.jpg" alt="Profile" style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover' }} />
-            <div onClick={() => setShowDropdown(!showDropdown)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 16px', border: '1px solid #ccc', borderRadius: 20, background: 'black', cursor: 'pointer', fontWeight: 700, fontSize: 16, minWidth: 100, color: '#fff' }}>
+            <img src="https://i.abcnewsfe.com/a/0a1c6627-6fdd-4cc3-8edf-d80790509c5a/emoji-1-abc-221220_1671573538915_hpEmbed_1x1.jpg" alt="Profile" className="w-10 h-10 rounded-full object-cover" />
+            <div onClick={() => setShowDropdown(!showDropdown)} className="flex items-center gap-[10px] px-4 py-2 border border-[#ccc] rounded-[20px] bg-black cursor-pointer font-bold text-[16px] min-w-[100px] text-white">
               Student Name <i className="bi bi-caret-down-fill"></i>
             </div>
             {showDropdown && (
-              <div style={{ position: 'absolute', top: '100%', right: 0, background: '#fff', border: '1px solid #ccc', borderRadius: 10, boxShadow: '0 4px 8px rgba(0,0,0,0.1)', zIndex: 99, minWidth: 180 }}>
-                <div onClick={() => navigate('/profile')} style={dropdownItemStyle}>View Profile</div>
-                <div onClick={() => alert('Settings')} style={dropdownItemStyle}>Settings</div>
+              <div className="absolute top-full right-0 bg-white border border-[#ccc] rounded-[10px] shadow z-[99] min-w-[180px]">
+                <div onClick={() => navigate('/profile')} className={dropdownItemClass}>View Profile</div>
+                <div onClick={() => alert('Settings')} className={dropdownItemClass}>Settings</div>
               </div>
             )}
           </div>
         </div>
 
         {/* Add Note Button */}
-        <div style={{ marginBottom: 24, display: 'flex', justifyContent: 'flex-end' }}>
-          <button onClick={() => setShowForm(true)} style={{ background: '#201B51', color: '#fff', padding: '10px 20px', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 600, fontSize: 16 }}>
+        <div className="mb-6 flex justify-end">
+          <button onClick={() => setShowForm(true)} className="bg-[#201B51] text-white px-5 py-2.5 rounded-lg cursor-pointer font-semibold text-[16px]">
             + Add Note
           </button>
         </div>
 
         {/* Form */}
         {showForm && (
-          <div style={{ background: '#fff', padding: 20, borderRadius: 12, marginBottom: 30, boxShadow: '0 2px 6px rgba(0,0,0,0.1)' }}>
-            <div style={{ marginBottom: 12 }}><input name="topic" value={formData.topic} onChange={handleInputChange} placeholder="Topic" style={inputStyle} /></div>
-            <div style={{ marginBottom: 12 }}><textarea name="description" value={formData.description} onChange={handleInputChange} placeholder="Description" rows={3} style={inputStyle} /></div>
-            <div style={{ marginBottom: 12 }}><input name="subject" value={formData.subject} onChange={handleInputChange} placeholder="Subject" style={inputStyle} /></div>
-            <div style={{ marginBottom: 12 }}>
-              <input type="date" name="date" value={formData.date} onChange={handleInputChange} style={inputStyle} />
+          <div className="bg-white p-5 rounded-[12px] mb-[30px] shadow">
+            <div className="mb-3"><input name="topic" value={formData.topic} onChange={handleInputChange} placeholder="Topic" className="w-full px-3.5 py-2.5 text-[16px] rounded-lg border border-[#ccc] outline-none" /></div>
+            <div className="mb-3"><textarea name="description" value={formData.description} onChange={handleInputChange} placeholder="Description" rows={3} className="w-full px-3.5 py-2.5 text-[16px] rounded-lg border border-[#ccc] outline-none" /></div>
+            <div className="mb-3"><input name="subject" value={formData.subject} onChange={handleInputChange} placeholder="Subject" className="w-full px-3.5 py-2.5 text-[16px] rounded-lg border border-[#ccc] outline-none" /></div>
+            <div className="mb-3">
+              <input type="date" name="date" value={formData.date} onChange={handleInputChange} className="w-full px-3.5 py-2.5 text-[16px] rounded-lg border border-[#ccc] outline-none" />
             </div>
-            <div style={{ display: 'flex', gap: 10 }}>
-              <button onClick={handleAddNote} style={{ ...buttonStyle, background: '#28a745' }}>Save</button>
-              <button onClick={() => setShowForm(false)} style={{ ...buttonStyle, background: '#dc3545' }}>Cancel</button>
+            <div className="flex gap-2.5">
+              <button onClick={handleAddNote} className="text-white px-4 py-2.5 rounded-md font-semibold text-[15px] bg-[#28a745]">Save</button>
+              <button onClick={() => setShowForm(false)} className="text-white px-4 py-2.5 rounded-md font-semibold text-[15px] bg-[#dc3545]">Cancel</button>
             </div>
           </div>
         )}
 
         {/* Notes List */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 24, marginBottom: 40 }}>
+        <div className="grid [grid-template-columns:repeat(auto-fill,minmax(280px,1fr))] gap-6 mb-10">
           {notes.map((note, idx) => (
-            <div key={idx} onClick={() => toggleNoteExpansion(idx)} style={{ background: '#23225c', borderRadius: 14, overflow: 'hidden', boxShadow: '0 2px 8px rgba(44,44,84,0.08)', minHeight: 180, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', cursor: 'pointer' }}>
-              <div style={{ padding: '18px', color: '#fff', fontWeight: 700, fontSize: 20, letterSpacing: 1 }}>
+            <div key={idx} onClick={() => toggleNoteExpansion(idx)} className="bg-[#23225c] rounded-[14px] overflow-hidden shadow min-h-[180px] flex flex-col justify-between cursor-pointer">
+              <div className="p-[18px] text-white font-bold text-[20px] tracking-[1px]">
                 {note.topic}
-                {expandedNoteIndex === idx && <div style={{ fontWeight: 400, fontSize: 14, marginTop: 10 }}>{note.description}</div>}
+                {expandedNoteIndex === idx && <div className="font-normal text-[14px] mt-2.5">{note.description}</div>}
               </div>
-              <div style={{ background: '#FFD600', padding: '16px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottomLeftRadius: 14, borderBottomRightRadius: 14 }}>
-                <span style={{ fontWeight: 600, fontSize: 14 }}>{note.subject}</span>
-                <span style={{ fontSize: 13, color: '#23225c', fontWeight: 600 }}>{formatDate(note.date)}</span>
-                <i className="bi bi-trash" onClick={(e) => { e.stopPropagation(); handleDeleteNote(idx); }} style={{ marginLeft: 10, cursor: 'pointer', color: '#23225c', fontSize: 18 }}></i>
+              <div className="bg-[#FFD600] px-[18px] py-4 flex justify-between items-center rounded-bl-[14px] rounded-br-[14px]">
+                <span className="font-semibold text-[14px]">{note.subject}</span>
+                <span className="text-[13px] text-[#23225c] font-semibold">{formatDate(note.date)}</span>
+                <i className="bi bi-trash ml-2.5 cursor-pointer text-[#23225c] text-[18px]" onClick={(e) => { e.stopPropagation(); handleDeleteNote(idx); }}></i>
               </div>
             </div>
           ))}
@@ -186,9 +178,9 @@ const Notes = () => {
 const SidebarItem = ({ icon, label, path, isActive, isLast, onClick }) => {
   const [hover, setHover] = useState(false);
   return (
-    <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onClick} style={{ display: 'flex', alignItems: 'center', padding: '18px 38px', cursor: 'pointer', fontWeight: 600, fontSize: 20, background: isActive ? '#35348a' : hover ? '#35348a' : 'transparent', marginBottom: isLast ? 0 : 12, borderTopLeftRadius: 30, borderBottomLeftRadius: 30, transition: 'background 0.2s' }}>
-      <i className={`bi ${icon}`} style={{ fontSize: 26, color: '#fff', marginRight: 22 }}></i>
-      <span style={{ fontStyle: 'italic', color: '#fff', letterSpacing: 1 }}>{label}</span>
+    <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onClick} className={`${(isActive || hover) ? 'bg-[#35348a]' : 'bg-transparent'} flex items-center px-[38px] py-[18px] cursor-pointer font-semibold text-[20px] ${isLast ? '' : 'mb-3'} rounded-tl-[30px] rounded-bl-[30px] transition-colors`}>
+      <i className={`bi ${icon} text-[26px] text-white mr-[22px]`}></i>
+      <span className="italic text-white tracking-[1px]">{label}</span>
     </div>
   );
 };

@@ -43,7 +43,7 @@ const PieChart = ({ data }) => {
   };
 
   return (
-    <div style={{ width: 320, height: 320 }}>
+    <div className="w-80 h-80">
       <Pie data={chartData} options={options} />
     </div>
   );
@@ -109,7 +109,6 @@ const InstructorProfile = () => {
 
   const handleEditToggle = () => {
     if (isEditing) {
-      // Save changes
       console.log('Saving changes:', instructorData);
     }
     setIsEditing(!isEditing);
@@ -119,164 +118,50 @@ const InstructorProfile = () => {
     navigate('/login', { replace: true });
   };
 
-  const handleSubjectChange = (e) => {
-    const selectedOptions = Array.from(e.target.selectedOptions).map(option => option.value);
-    setInstructorData(prev => ({
-      ...prev,
-      subjects: selectedOptions
-    }));
-  };
-
-  const handleSectionChange = (e) => {
-    const selectedOptions = Array.from(e.target.selectedOptions).map(option => option.value);
-    setInstructorData(prev => ({
-      ...prev,
-      sections: selectedOptions
-    }));
-  };
-
-  const inputStyle = {
-    width: '100%',
-    padding: '10px 14px',
-    fontSize: 17,
-    border: '1px solid #e0e0e0',
-    borderRadius: 8,
-    marginBottom: 18,
-    boxSizing: 'border-box',
-    fontFamily: 'inherit',
-    background: '#f9fafd',
-    color: '#232323',
-    transition: 'border 0.2s, background 0.2s',
-  };
-
-  const editableInputStyle = {
-    ...inputStyle,
-    background: '#fff',
-    border: '1px solid #23225c',
-    color: '#000',
-  };
-
-  const buttonStyle = {
-    padding: '8px 24px',
-    fontSize: 15,
-    fontWeight: 600,
-    borderRadius: 8,
-    cursor: 'pointer',
-    border: 'none',
-    background: isEditing ? '#28a745' : '#23225c',
-    color: '#fff',
-    transition: 'background 0.2s',
-  };
-
   return (
-    <div style={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
+    <div className="flex h-screen overflow-hidden">
       {/* Left Panel */}
-      <div style={{
-        width: 320,
-        background: 'linear-gradient(135deg, #23225c 60%, #1A1850 100%)',
-        color: '#fff',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        paddingTop: 32,
-        boxShadow: '2px 0 16px rgba(44,44,84,0.10)',
+      <div className="w-80 pt-8 flex flex-col items-center shadow-lg" style={{
+        background: 'linear-gradient(135deg, #23225c 60%, #1A1850 100%)'
       }}>
-        <div style={{
-          fontWeight: 800,
-          fontSize: 26,
-          letterSpacing: 1,
-          color: '#fff',
-          alignSelf: 'flex-start',
-          marginLeft: 32,
-          marginTop: 8,
-          marginBottom: 32,
-          fontFamily: 'Segoe UI, sans-serif',
-        }}>
+        <div className="self-start ml-4 mt-2 mb-8 text-white font-extrabold text-2xl tracking-wider">
           INSTRUCTOR PROFILE
         </div>
 
-        <div style={{
-          width: 200,
-          height: 200,
-          borderRadius: '50%',
-          background: '#D9D9D9',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: 48,
-          color: '#666',
-          fontWeight: 700,
-          boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
-          marginBottom: 40,
-        }}>
-          AA
+        <div className="w-50 h-50 rounded-full bg-gray-300 flex items-center justify-center text-5xl text-gray-600 font-bold shadow-md mb-10 ml-0">
+          I-Profile
         </div>
       </div>
 
       {/* Main Content */}
-      <div style={{
-        flex: 1,
-        overflowY: 'auto',
-        background: '#f4f6fb',
-        position: 'relative',
-      }}>
+      <div className="flex-1 overflow-y-auto bg-gray-100 relative">
         {/* Back Button */}
-        <div style={{
-          position: 'absolute',
-          top: 42,
-          left: 48,
-          cursor: 'pointer',
-          fontSize: 32,
-          color: '#232323',
-        }} onClick={() => navigate('/instructor-dashboard')}>
+        <div 
+          className="absolute top-11 left-12 cursor-pointer text-3xl text-gray-800"
+          onClick={() => navigate('/instructor-dashboard')}
+        >
           <i className="bi bi-arrow-left"></i>
         </div>
 
         {/* Profile Dropdown */}
-        <div style={{
-          position: 'absolute',
-          top: 32,
-          right: 48,
-          zIndex: 2,
-        }}>
-          <div style={{ position: 'relative' }}>
-            <div style={{
-              borderRadius: 50,
-              padding: '10px 20px',
-              display: 'flex',
-              alignItems: 'center',
-              background: '#000000',
-              color: '#ffffff',
-              cursor: 'pointer',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
-            }} onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-              <span style={{
-                fontWeight: 'bold',
-                fontSize: '16px',
-                letterSpacing: '0.5px',
-              }}>
+        <div className="absolute top-8 right-12 z-10">
+          <div className="relative">
+            <div 
+              className="rounded-full py-2.5 px-5 flex items-center bg-black text-white cursor-pointer shadow-md"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <span className="font-bold text-base tracking-wide">
                 Instructor
               </span>
-              <i className="bi bi-caret-down-fill" style={{ marginLeft: 12, fontSize: 14 }}></i>
+              <i className="bi bi-caret-down-fill ml-3 text-sm"></i>
             </div>
 
             {isDropdownOpen && (
-              <div style={{
-                position: 'absolute',
-                top: '100%',
-                right: 0,
-                marginTop: 12,
-                background: '#fff',
-                borderRadius: 12,
-                boxShadow: '0 6px 20px rgba(0,0,0,0.15)',
-                minWidth: 200,
-              }}>
-                <div style={{
-                  padding: '12px 20px',
-                  cursor: 'pointer',
-                  fontSize: 16,
-                  color: '#333',
-                }} onClick={handleLogout}>
+              <div className="absolute top-full right-0 mt-3 bg-white rounded-xl shadow-xl min-w-[200px]">
+                <div 
+                  className="py-3 px-5 cursor-pointer text-base text-gray-800 hover:bg-gray-50"
+                  onClick={handleLogout}
+                >
                   Logout
                 </div>
               </div>
@@ -285,87 +170,91 @@ const InstructorProfile = () => {
         </div>
 
         {/* Form Content */}
-        <div style={{
-          maxWidth: 800,
-          margin: '0 auto',
-          padding: '96px 24px 48px 24px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 32,
-        }}>
+        <div className="max-w-4xl mx-auto px-6 pt-24 pb-12 flex flex-col gap-8">
           {/* Instructor Info */}
-          <div style={{
-            background: '#fff',
-            borderRadius: 18,
-            boxShadow: '0 4px 24px rgba(44,44,84,0.10)',
-            padding: '36px 40px',
-          }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-              <div style={{
-                fontWeight: 700,
-                fontSize: 22,
-                color: '#23225c',
-                letterSpacing: 0.5,
-              }}>
+          <div className="bg-white rounded-2xl shadow-lg p-9">
+            <div className="flex justify-between items-center mb-6">
+              <div className="font-bold text-xl tracking-wide" style={{ color: '#23225c' }}>
                 Instructor Information
               </div>
-              <button style={buttonStyle} onClick={handleEditToggle}>
+              <button 
+                className={`py-2 px-6 text-sm font-semibold rounded-lg cursor-pointer border-0 text-white transition-colors ${
+                  isEditing ? 'bg-green-600 hover:bg-green-700' : 'hover:bg-opacity-90'
+                }`}
+                style={{ background: isEditing ? '#28a745' : '#23225c' }}
+                onClick={handleEditToggle}
+              >
                 {isEditing ? 'Save Changes' : 'Edit Profile'}
               </button>
             </div>
 
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: 28,
-            }}>
-              {/* Form Fields */}
+            <div className="grid grid-cols-2 gap-7">
+              {/* Instructor ID */}
               <div>
-                <div style={{ fontWeight: 600, fontSize: 17, marginBottom: 6, color: 'black' }}>
+                <div className="font-semibold text-base mb-1.5 text-black">
                   Instructor ID
                 </div>
                 <input
                   name="instructorId"
-                  style={isEditing ? editableInputStyle : inputStyle}
+                  className={`w-full py-2.5 px-3.5 text-base border rounded-lg mb-4.5 transition-all ${
+                    isEditing 
+                      ? 'bg-white border-[#23225c] text-black' 
+                      : 'bg-[#f9fafd] border-gray-200 text-gray-800'
+                  }`}
                   readOnly={!isEditing}
                   value={instructorData.instructorId}
                   onChange={handleInputChange}
                 />
               </div>
 
+              {/* Full Name */}
               <div>
-                <div style={{ fontWeight: 600, fontSize: 17, marginBottom: 6, color: 'black' }}>
+                <div className="font-semibold text-base mb-1.5 text-black">
                   Full Name
                 </div>
                 <input
                   name="fullName"
-                  style={isEditing ? editableInputStyle : inputStyle}
+                  className={`w-full py-2.5 px-3.5 text-base border rounded-lg mb-4.5 transition-all ${
+                    isEditing 
+                      ? 'bg-white border-[#23225c] text-black' 
+                      : 'bg-[#f9fafd] border-gray-200 text-gray-800'
+                  }`}
                   readOnly={!isEditing}
                   value={instructorData.fullName}
                   onChange={handleInputChange}
                 />
               </div>
 
+              {/* Email Address */}
               <div>
-                <div style={{ fontWeight: 600, fontSize: 17, marginBottom: 6, color: 'black' }}>
+                <div className="font-semibold text-base mb-1.5 text-black">
                   Email Address
                 </div>
                 <input
                   name="email"
-                  style={isEditing ? editableInputStyle : inputStyle}
+                  className={`w-full py-2.5 px-3.5 text-base border rounded-lg mb-4.5 transition-all ${
+                    isEditing 
+                      ? 'bg-white border-[#23225c] text-black' 
+                      : 'bg-[#f9fafd] border-gray-200 text-gray-800'
+                  }`}
                   readOnly={!isEditing}
                   value={instructorData.email}
                   onChange={handleInputChange}
                 />
               </div>
 
+              {/* Department */}
               <div>
-                <div style={{ fontWeight: 600, fontSize: 17, marginBottom: 6, color: 'black' }}>
+                <div className="font-semibold text-base mb-1.5 text-black">
                   Department
                 </div>
                 <select
                   name="department"
-                  style={isEditing ? editableInputStyle : inputStyle}
+                  className={`w-full py-2.5 px-3.5 text-base border rounded-lg mb-4.5 transition-all ${
+                    isEditing 
+                      ? 'bg-white border-[#23225c] text-black' 
+                      : 'bg-[#f9fafd] border-gray-200 text-gray-800'
+                  }`}
                   disabled={!isEditing}
                   value={instructorData.department}
                   onChange={handleInputChange}
@@ -376,13 +265,18 @@ const InstructorProfile = () => {
                 </select>
               </div>
 
+              {/* Course */}
               <div>
-                <div style={{ fontWeight: 600, fontSize: 17, marginBottom: 6, color: 'black' }}>
+                <div className="font-semibold text-base mb-1.5 text-black">
                   Course
                 </div>
                 <select
                   name="course"
-                  style={isEditing ? editableInputStyle : inputStyle}
+                  className={`w-full py-2.5 px-3.5 text-base border rounded-lg mb-4.5 transition-all ${
+                    isEditing 
+                      ? 'bg-white border-[#23225c] text-black' 
+                      : 'bg-[#f9fafd] border-gray-200 text-gray-800'
+                  }`}
                   disabled={!isEditing}
                   value={instructorData.course}
                   onChange={handleInputChange}
@@ -392,29 +286,20 @@ const InstructorProfile = () => {
                 </select>
               </div>
 
+              {/* Subject */}
               <div>
-                <div style={{ fontWeight: 600, fontSize: 17, marginBottom: 6, color: 'black' }}>
+                <div className="font-semibold text-base mb-1.5 text-black">
                   Subject
                 </div>
-                <div style={{
-                  border: '1px solid #e0e0e0',
-                  borderRadius: 8,
-                  maxHeight: 200,
-                  overflow: 'auto',
-                  background: isEditing ? '#fff' : '#f9fafd'
-                }}>
+                <div className={`border border-gray-200 rounded-lg max-h-52 overflow-auto ${
+                  isEditing ? 'bg-white' : 'bg-[#f9fafd]'
+                }`}>
                   {courseData[instructorData.course]?.subjects.map((subject) => (
                     <div 
                       key={subject}
-                      style={{
-                        padding: '10px 14px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 10,
-                        borderBottom: '1px solid #e0e0e0',
-                        cursor: isEditing ? 'pointer' : 'default',
-                        background: instructorData.subjects.includes(subject) ? '#f0f9ff' : 'transparent'
-                      }}
+                      className={`py-2.5 px-3.5 flex items-center gap-2.5 border-b border-gray-200 ${
+                        isEditing ? 'cursor-pointer' : 'cursor-default'
+                      } ${instructorData.subjects.includes(subject) ? 'bg-blue-50' : ''}`}
                       onClick={() => {
                         if (!isEditing) return;
                         setInstructorData(prev => ({
@@ -430,56 +315,39 @@ const InstructorProfile = () => {
                         checked={instructorData.subjects.includes(subject)}
                         onChange={() => {}}
                         disabled={!isEditing}
-                        style={{ cursor: isEditing ? 'pointer' : 'default' }}
+                        className={isEditing ? 'cursor-pointer' : 'cursor-default'}
                       />
-                      <span style={{ color: '#232323', flex: 1 }}>{subject}</span>
+                      <span className="text-gray-800 flex-1">{subject}</span>
                     </div>
                   ))}
                 </div>
-                <div style={{ fontSize: 12, color: '#666', marginTop: 4 }}>
+                <div className="text-xs text-gray-600 mt-1">
                   Click subjects to select/deselect
                 </div>
               </div>
 
+              {/* Section */}
               <div>
-                <div style={{ fontWeight: 600, fontSize: 17, marginBottom: 6, color: 'black' }}>
+                <div className="font-semibold text-base mb-1.5 text-black">
                   Section
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <div className="flex flex-col gap-3">
                   {Object.entries(courseData[instructorData.course]?.sections || {}).map(([year, sections]) => (
                     <div key={year}>
-                      <div style={{ 
-                        fontWeight: 600, 
-                        fontSize: 14, 
-                        color: '#666', 
-                        marginBottom: 4,
-                        borderBottom: '1px solid #eee',
-                        paddingBottom: 4
-                      }}>
+                      <div className="font-semibold text-sm text-gray-600 mb-1 border-b border-gray-200 pb-1">
                         {year}
                       </div>
-                      <div style={{ 
-                        display: 'grid', 
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))',
-                        gap: 8
-                      }}>
+                      <div className="grid gap-2" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))' }}>
                         {sections.map((section) => (
                           <div
                             key={section}
-                            style={{
-                              padding: '8px 12px',
-                              borderRadius: 6,
-                              border: '1px solid #e0e0e0',
-                              cursor: isEditing ? 'pointer' : 'default',
-                              background: instructorData.sections.includes(section) 
-                                ? '#f0f9ff' 
-                                : isEditing ? '#fff' : '#f9fafd',
-                              color: '#232323',
-                              fontSize: 14,
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: 8
-                            }}
+                            className={`py-2 px-3 rounded-md border border-gray-200 text-sm flex items-center gap-2 ${
+                              isEditing ? 'cursor-pointer' : 'cursor-default'
+                            } ${
+                              instructorData.sections.includes(section) 
+                                ? 'bg-blue-50' 
+                                : isEditing ? 'bg-white' : 'bg-[#f9fafd]'
+                            }`}
                             onClick={() => {
                               if (!isEditing) return;
                               setInstructorData(prev => ({
@@ -495,16 +363,16 @@ const InstructorProfile = () => {
                               checked={instructorData.sections.includes(section)}
                               onChange={() => {}}
                               disabled={!isEditing}
-                              style={{ cursor: isEditing ? 'pointer' : 'default' }}
+                              className={isEditing ? 'cursor-pointer' : 'cursor-default'}
                             />
-                            {section}
+                            <span className="text-gray-800">{section}</span>
                           </div>
                         ))}
                       </div>
                     </div>
                   ))}
                 </div>
-                <div style={{ fontSize: 12, color: '#666', marginTop: 4 }}>
+                <div className="text-xs text-gray-600 mt-1">
                   Click sections to select/deselect
                 </div>
               </div>
@@ -512,60 +380,26 @@ const InstructorProfile = () => {
           </div>
 
           {/* Performance Section */}
-          <div style={{
-            background: '#fff',
-            borderRadius: 18,
-            boxShadow: '0 4px 24px rgba(44,44,84,0.10)',
-            padding: '36px 40px',
-          }}>
-            <div style={{
-              fontWeight: 700,
-              fontSize: 22,
-              marginBottom: 18,
-              color: '#23225c',
-              letterSpacing: 0.5,
-            }}>
+          <div className="bg-white rounded-2xl shadow-lg p-9">
+            <div className="font-bold text-xl mb-4.5 tracking-wide" style={{ color: '#23225c' }}>
               Class Performance
             </div>
-            <div style={{
-              display: 'flex',
-              flexDirection: 'row',
-              gap: 32,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
+            <div className="flex flex-row gap-8 items-center justify-center">
               <PieChart data={pieData} />
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 18,
-                marginLeft: 12,
-              }}>
+              <div className="flex flex-col gap-4.5 ml-3">
                 {pieData.map((item, index) => (
-                  <div key={index} style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 10,
-                  }}>
-                    <span style={{
-                      width: 18,
-                      height: 18,
-                      borderRadius: 4,
-                      background: item.color,
-                      border: `1.5px solid ${item.color}99`,
-                    }}></span>
-                    <span style={{
-                      fontWeight: 600,
-                      color: '#232323',
-                      fontSize: 16,
-                    }}>
+                  <div key={index} className="flex items-center gap-2.5">
+                    <span 
+                      className="w-4.5 h-4.5 rounded"
+                      style={{
+                        background: item.color,
+                        border: `1.5px solid ${item.color}99`
+                      }}
+                    ></span>
+                    <span className="font-semibold text-gray-800 text-base">
                       {item.label}
                     </span>
-                    <span style={{
-                      color: '#232323',
-                      fontSize: 15,
-                      marginLeft: 8,
-                    }}>
+                    <span className="text-gray-800 text-sm ml-2">
                       {item.value}%
                     </span>
                   </div>

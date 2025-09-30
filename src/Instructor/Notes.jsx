@@ -88,13 +88,13 @@ const Notes = () => {
   };
 
   return (
-    <div style={{ display: 'flex', width: '100vw', height: '100vh', background: '#f4f6fb', fontFamily: 'Segoe UI, sans-serif' }}>
+    <div className="flex w-screen h-screen bg-[#f4f6fb] font-sans">
       {/* Sidebar */}
-      <aside style={{ width: 290, background: '#201B51', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '40px 0', boxShadow: '2px 0 16px rgba(44,44,84,0.08)', height: '100vh' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 60 }}>
-          <img src={logo} alt="Logo" style={{ width: 300, height: 200, objectFit: 'contain', borderRadius: 18, boxShadow: '0 2px 8px rgba(0,0,0,0.10)' }} />
+      <aside className="w-[290px] bg-[#201B51] text-white flex flex-col items-center py-10 shadow-[2px_0_16px_rgba(44,44,84,0.08)] h-screen">
+        <div className="flex flex-col items-center mb-[60px]">
+          <img src={logo} alt="Logo" className="w-[300px] h-[200px] object-contain rounded-[18px] shadow" />
         </div>
-        <nav style={{ width: '100%' }}>
+        <nav className="w-full">
           {navItems.map((item, idx) => (
             <SidebarItem
               key={item.label}
@@ -110,31 +110,20 @@ const Notes = () => {
       </aside>
 
       {/* Main Content */}
-      <main style={{ flex: 1, padding: '48px 60px', overflowY: 'auto' }}>
+      <main className="flex-1 px-[60px] py-12 overflow-y-auto">
         {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 36 }}>
-          <h2 style={{ margin: 0, fontWeight: 800, fontSize: 36, color: '#23225c' }}>NOTES</h2>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, position: 'relative' }}>
-            <div style={{ position: 'relative' }}>
+        <div className="flex justify-between items-center mb-9">
+          <h2 className="m-0 font-extrabold text-[36px] text-[#23225c]">NOTES</h2>
+          <div className="flex items-center gap-[14px] relative">
+            <div className="relative">
               <i 
-                className="bi bi-bell-fill" 
-                style={{ fontSize: 22, color: '#23225c', cursor: 'pointer' }} 
+                className="bi bi-bell-fill text-[22px] text-[#23225c] cursor-pointer" 
                 onClick={() => setShowNotifications(!showNotifications)}
               />
               {showNotifications && (
-                <div style={{ 
-                  position: 'absolute', 
-                  right: 0, 
-                  top: '130%', 
-                  background: '#fff',
-                  border: '1px solid #ccc',
-                  borderRadius: 10,
-                  boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                  zIndex: 100,
-                  minWidth: 250 
-                }}>
+                <div className="absolute right-0 top-[130%] bg-white border border-[#ccc] rounded-[10px] shadow z-[100] min-w-[250px]">
                   {notificationItems.map((note, idx) => (
-                    <div key={idx} style={notificationItemStyle}>{note}</div>
+                    <div key={idx} className="px-4 py-2 text-sm text-[#23225c] border-b border-[#eee]">{note}</div>
                   ))}
                 </div>
               )}
@@ -142,64 +131,28 @@ const Notes = () => {
             <img 
               src="https://i.abcnewsfe.com/a/0a1c6627-6fdd-4cc3-8edf-d80790509c5a/emoji-1-abc-221220_1671573538915_hpEmbed_1x1.jpg" 
               alt="Profile" 
-              style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover' }} 
+              className="w-10 h-10 rounded-full object-cover"
             />
             <div 
               onClick={() => setShowDropdown(!showDropdown)} 
-              style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: 10, 
-                padding: '8px 16px', 
-                border: '1px solid #ccc', 
-                borderRadius: 20, 
-                background: 'black', 
-                cursor: 'pointer', 
-                fontWeight: 700, 
-                fontSize: 16, 
-                minWidth: 100, 
-                color: '#fff' 
-              }}
+              className="flex items-center gap-[10px] px-4 py-2 border border-[#ccc] rounded-[20px] bg-black cursor-pointer font-bold text-[16px] min-w-[100px] text-white"
             >
               Instructor Name <i className="bi bi-caret-down-fill" />
             </div>
             {showDropdown && (
-              <div style={{ 
-                position: 'absolute', 
-                top: '100%', 
-                right: 0, 
-                background: '#fff',
-                border: '1px solid #ccc',
-                borderRadius: 10,
-                boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                zIndex: 99,
-                minWidth: 180 
-              }}>
-                <div onClick={() => navigate('/I_Profile')} style={dropdownItemStyle}>View Profile</div>
-                <div onClick={() => alert('Settings')} style={dropdownItemStyle}>Settings</div>
+              <div className="absolute top-full right-0 bg-white border border-[#ccc] rounded-[10px] shadow z-[99] min-w-[180px]">
+                <div onClick={() => navigate('/I_Profile')} className="px-4 py-2 cursor-pointer text-[15px] text-[#23225c] font-medium border-b border-[#eee] bg-white">View Profile</div>
+                <div onClick={() => alert('Settings')} className="px-4 py-2 cursor-pointer text-[15px] text-[#23225c] font-medium border-b border-[#eee] bg-white">Settings</div>
               </div>
             )}
           </div>
         </div>
 
         {/* Add Note Button */}
-        <div style={{ marginBottom: 24, display: 'flex', justifyContent: 'flex-end' }}>
+        <div className="mb-6 flex justify-end">
           <button 
             onClick={() => setShowForm(true)} 
-            style={{
-              background: '#7CFC00',
-              color: '#23225c',
-              padding: '12px 24px',
-              border: 'none',
-              borderRadius: 8,
-              cursor: 'pointer',
-              fontWeight: 700,
-              fontSize: 15,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              boxShadow: '0 2px 8px rgba(124,252,0,0.3)'
-            }}
+            className="bg-[#7CFC00] text-[#23225c] px-6 py-3 rounded-lg font-bold text-[15px] flex items-center gap-2 shadow"
           >
             ADD NOTE <i className="bi bi-plus-lg"></i>
           </button>
@@ -207,56 +160,55 @@ const Notes = () => {
 
         {/* Form */}
         {showForm && (
-          <div style={formContainerStyle}>
-            <h3 style={{ margin: '0 0 20px 0', color: '#23225c', fontSize: 20, fontWeight: 700 }}>Add New Note</h3>
-            <div style={{ marginBottom: 16 }}>
-              <label style={labelStyle}>Topic</label>
-              <input name="topic" value={formData.topic} onChange={handleInputChange} placeholder="Enter topic" style={inputStyle} />
+          <div className="bg-white p-10 rounded-[16px] mb-[30px] shadow">
+            <h3 className="m-0 mb-5 text-[#23225c] text-[20px] font-bold">Add New Note</h3>
+            <div className="mb-4">
+              <label className="block mb-2 text-[#23225c] font-semibold">Topic</label>
+              <input name="topic" value={formData.topic} onChange={handleInputChange} placeholder="Enter topic" className="w-full px-4 py-2.5 border border-[#ddd] rounded-lg text-[16px] text-[#23225c]" />
             </div>
-            <div style={{ marginBottom: 16 }}>
-              <label style={labelStyle}>Description</label>
+            <div className="mb-4">
+              <label className="block mb-2 text-[#23225c] font-semibold">Description</label>
               <textarea 
                 name="description" 
                 value={formData.description} 
                 onChange={handleInputChange} 
                 placeholder="Enter description" 
                 rows={3} 
-                style={inputStyle} 
+                className="w-full px-4 py-2.5 border border-[#ddd] rounded-lg text-[16px] text-[#23225c]" 
               />
             </div>
-            <div style={{ marginBottom: 16 }}>
-              <label style={labelStyle}>Subject</label>
-              <input name="subject" value={formData.subject} onChange={handleInputChange} placeholder="Enter subject" style={inputStyle} />
+            <div className="mb-4">
+              <label className="block mb-2 text-[#23225c] font-semibold">Subject</label>
+              <input name="subject" value={formData.subject} onChange={handleInputChange} placeholder="Enter subject" className="w-full px-4 py-2.5 border border-[#ddd] rounded-lg text-[16px] text-[#23225c]" />
             </div>
-            <div style={{ marginBottom: 24 }}>
-              <label style={labelStyle}>Date</label>
-              <input type="date" name="date" value={formData.date} onChange={handleInputChange} style={inputStyle} />
+            <div className="mb-6">
+              <label className="block mb-2 text-[#23225c] font-semibold">Date</label>
+              <input type="date" name="date" value={formData.date} onChange={handleInputChange} className="w-full px-4 py-2.5 border border-[#ddd] rounded-lg text-[16px] text-[#23225c]" />
             </div>
-            <div style={{ display: 'flex', gap: 12, justifyContent: 'flex-end' }}>
-              <button onClick={() => setShowForm(false)} style={{ ...buttonStyle, background: '#ff4444' }}>Cancel</button>
-              <button onClick={handleAddNote} style={{ ...buttonStyle, background: '#7CFC00' }}>Save</button>
+            <div className="flex gap-3 justify-end">
+              <button onClick={() => setShowForm(false)} className="px-6 py-2.5 rounded-lg text-[16px] font-semibold bg-[#ff4444] text-white">Cancel</button>
+              <button onClick={handleAddNote} className="px-6 py-2.5 rounded-lg text-[16px] font-semibold bg-[#7CFC00] text-[#23225c]">Save</button>
             </div>
           </div>
         )}
 
         {/* Notes Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 40 }}>
+        <div className="grid [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] gap-10">
           {notes.map((note, idx) => (
-            <div key={idx} onClick={() => toggleNoteExpansion(idx)} style={noteCardStyle}>
-              <div style={{ padding: '20px', color: '#fff' }}>
-                <h3 style={{ margin: 0, fontSize: 24, fontWeight: 800 }}>{note.topic}</h3>
+            <div key={idx} onClick={() => toggleNoteExpansion(idx)} className="bg-[#23225c] rounded-[16px] overflow-hidden shadow cursor-pointer">
+              <div className="p-5 text-white">
+                <h3 className="m-0 text-[24px] font-extrabold">{note.topic}</h3>
                 {expandedNoteIndex === idx && (
-                  <p style={{ margin: '12px 0 0 0', fontSize: 15, lineHeight: 1.5 }}>{note.description}</p>
+                  <p className="mt-3 text-[15px] leading-snug">{note.description}</p>
                 )}
               </div>
-              <div style={noteFooterStyle}>
-                <span style={{ fontWeight: 600, fontSize: 14 }}>{note.subject}</span>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <span style={{ fontSize: 13, color: '#23225c', fontWeight: 600 }}>{formatDate(note.date)}</span>
+              <div className="bg-[#FFD600] px-5 py-4 flex justify-between items-center">
+                <span className="font-semibold text-[14px]">{note.subject}</span>
+                <div className="flex items-center gap-3">
+                  <span className="text-[13px] text-[#23225c] font-semibold">{formatDate(note.date)}</span>
                   <i 
-                    className="bi bi-trash" 
-                    onClick={(e) => { e.stopPropagation(); handleDeleteNote(idx); }} 
-                    style={{ cursor: 'pointer', color: '#23225c', fontSize: 18 }}
+                    className="bi bi-trash cursor-pointer text-[#23225c] text-[18px]" 
+                    onClick={(e) => { e.stopPropagation(); handleDeleteNote(idx); }}
                   />
                 </div>
               </div>
@@ -269,137 +221,18 @@ const Notes = () => {
 };
 
 // Styles
-const notificationDropdownStyle = {
-  position: 'absolute',
-  right: 0,
-  top: '130%',
-  background: '#fff',
-  border: '1px solid #ccc',
-  borderRadius: 10,
-  boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-  zIndex: 100,
-  minWidth: 250
-};
-
-const notificationItemStyle = {
-  padding: '10px 16px',
-  fontSize: 14,
-  color: '#23225c',
-  borderBottom: '1px solid #eee'
-};
-
-const profileImageStyle = {
-  width: 40,
-  height: 40,
-  borderRadius: '50%',
-  objectFit: 'cover'
-};
-
-const profileButtonStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: 10,
-  padding: '8px 16px',
-  border: '1px solid #ccc',
-  borderRadius: 20,
-  background: 'black',
-  cursor: 'pointer',
-  fontWeight: 700,
-  fontSize: 16,
-  minWidth: 100,
-  color: '#fff'
-};
-
-const dropdownContainerStyle = {
-  position: 'absolute',
-  top: '100%',
-  right: 0,
-  background: '#fff',
-  border: '1px solid #ccc',
-  borderRadius: 10,
-  boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-  zIndex: 99,
-  minWidth: 180
-};
-
-const formContainerStyle = {
-  background: '#fff',
-  padding: 40,
-  borderRadius: 16,
-  marginBottom: 30,
-  boxShadow: '0 4px 16px rgba(0,0,0,0.06)'
-};
-
-const labelStyle = {
-  display: 'block',
-  marginBottom: 8,
-  color: '#23225c',
-  fontWeight: 600
-};
-
-const inputStyle = {
-  width: '100%',
-  padding: '10px 16px',
-  border: '1px solid #ddd',
-  borderRadius: 8,
-  fontSize: 16,
-  color: '#23225c'
-};
-
-const buttonStyle = {
-  padding: '10px 24px',
-  border: 'none',
-  borderRadius: 8,
-  fontSize: 16,
-  fontWeight: 600,
-  color: '#23225c',
-  cursor: 'pointer'
-};
-
-const noteCardStyle = {
-  background: '#23225c',
-  borderRadius: 16,
-  overflow: 'hidden',
-  boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
-  cursor: 'pointer',
-  transition: 'transform 0.2s',
-  ':hover': {
-    transform: 'translateY(-4px)'
-  }
-};
-
-const noteFooterStyle = {
-  background: '#FFD600',
-  padding: '16px 20px',
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center'
-};
+// replaced inline style objects with Tailwind classes
 
 const SidebarItem = ({ icon, label, path, isActive, isLast, onClick }) => {
   const [hover, setHover] = useState(false);
   return (
-    <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onClick} style={{ display: 'flex', alignItems: 'center', padding: '18px 38px', cursor: 'pointer', fontWeight: 600, fontSize: 20, background: isActive ? '#35348a' : hover ? '#35348a' : 'transparent', marginBottom: isLast ? 0 : 12, borderTopLeftRadius: 30, borderBottomLeftRadius: 30, transition: 'background 0.2s' }}>
-      <i className={`bi ${icon}`} style={{ fontSize: 26, color: '#fff', marginRight: 22 }}></i>
-      <span style={{ fontStyle: 'italic', color: '#fff', letterSpacing: 1 }}>{label}</span>
+    <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onClick} className={`${(isActive || hover) ? 'bg-[#35348a]' : 'bg-transparent'} flex items-center px-[38px] py-[18px] cursor-pointer font-semibold text-[20px] ${isLast ? '' : 'mb-3'} rounded-tl-[30px] rounded-bl-[30px] transition-colors`}>
+      <i className={`bi ${icon} text-[26px] text-white mr-[22px]`}></i>
+      <span className="italic text-white tracking-[1px]">{label}</span>
     </div>
   );
 };
 
-const dropdownItemStyle = {
-  padding: '10px 16px',
-  cursor: 'pointer',
-  fontSize: 15,
-  color: '#23225c',
-  fontWeight: 500,
-  borderBottom: '1px solid #eee',
-  background: '#fff',
-};
-
-const dropdownIconStyle = {
-  fontSize: 18,
-  marginRight: 12,
-  color: '#23225c'
-};
+// dropdown item styles migrated to Tailwind inline classes
 
 export default Notes;

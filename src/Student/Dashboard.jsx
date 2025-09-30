@@ -43,15 +43,8 @@ const Dashboard = () => {
     }
   };
 
-  const dropdownItemStyle = {
-    padding: '10px 16px',
-    cursor: 'pointer',
-    fontSize: 15,
-    color: '#23225c',
-    fontWeight: 500,
-    borderBottom: '1px solid #eee',
-    background: '#fff'
-  };
+  const dropdownItemClass =
+    'px-4 py-2 cursor-pointer text-[15px] text-[#23225c] font-medium border-b border-[#eee] bg-white';
 
   const notificationItems = [
     'New assignment added in IT Elective.',
@@ -60,12 +53,12 @@ const Dashboard = () => {
   ];
 
   return (
-    <div style={{ display: 'flex', width: '100vw', height: '100vh', minWidth: '100vw', minHeight: '100vh', fontFamily: 'Segoe UI, sans-serif', background: '#f4f6fb', overflow: 'hidden' }}>
-      <aside style={{ width: 290, background: '#201B51', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '40px 0', boxShadow: '2px 0 16px rgba(44,44,84,0.08)', height: '100vh' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 60 }}>
-          <img src={logo} alt="Logo" style={{ width: 300, height: 200, objectFit: 'contain', borderRadius: 18, boxShadow: '0 2px 8px rgba(0,0,0,0.10)' }} />
+    <div className="flex w-screen h-screen min-w-screen min-h-screen font-sans bg-[#f4f6fb] overflow-hidden">
+      <aside className="w-[290px] bg-[#201B51] text-white flex flex-col items-center py-10 shadow-[2px_0_16px_rgba(44,44,84,0.08)] h-screen">
+        <div className="flex flex-col items-center mb-[60px]">
+          <img src={logo} alt="Logo" className="w-[300px] h-[200px] object-contain rounded-[18px] shadow" />
         </div>
-        <nav style={{ width: '100%' }}>
+        <nav className="w-full">
           {navItems.map((item, idx) => (
             <SidebarItem
               key={item.label}
@@ -80,44 +73,44 @@ const Dashboard = () => {
         </nav>
       </aside>
 
-      <main style={{ flex: 1, padding: '48px 60px', height: '100vh', overflowY: 'auto' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 36 }}>
-          <h2 style={{ margin: 0, fontWeight: 800, fontSize: 36, color: '#23225c' }}>DASHBOARD</h2>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, position: 'relative' }}>
-            <div style={{ position: 'relative' }}>
-              <i className="bi bi-bell-fill" style={{ fontSize: 22, color: '#23225c', cursor: 'pointer' }} onClick={() => setShowNotifications(!showNotifications)}></i>
+      <main className="flex-1 px-[60px] py-12 h-screen overflow-y-auto">
+      <div className="flex justify-between items-center mb-9">
+          <h2 className="m-0 font-extrabold text-[36px] text-[#23225c]">DASHBOARD</h2>
+          <div className="flex items-center gap-[14px] relative">
+            <div className="relative">
+              <i className="bi bi-bell-fill text-[22px] text-[#23225c] cursor-pointer" onClick={() => setShowNotifications(!showNotifications)}></i>
               {showNotifications && (
-                <div style={{ position: 'absolute', right: 0, top: '130%', background: '#fff', border: '1px solid #ccc', borderRadius: 10, boxShadow: '0 4px 8px rgba(0,0,0,0.1)', zIndex: 100, minWidth: 250 }}>
+                <div className="absolute right-0 top-[130%] bg-white border border-[#ccc] rounded-[10px] shadow z-[100] min-w-[250px]">
                   {notificationItems.map((note, idx) => (
-                    <div key={idx} style={{ padding: '10px 16px', fontSize: 14, color: '#23225c', borderBottom: '1px solid #eee' }}>{note}</div>
+                    <div key={idx} className="px-4 py-2 text-sm text-[#23225c] border-b border-[#eee]">{note}</div>
                   ))}
                 </div>
               )}
             </div>
-            <img src="https://i.abcnewsfe.com/a/0a1c6627-6fdd-4cc3-8edf-d80790509c5a/emoji-1-abc-221220_1671573538915_hpEmbed_1x1.jpg" alt="Profile" style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover' }} />
-            <div onClick={() => setShowDropdown(!showDropdown)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 16px', border: '1px solid #ccc', borderRadius: 20, background: 'black', cursor: 'pointer', fontWeight: 700, fontSize: 16, minWidth: 100, color: '#fff' }}>
+            <img src="https://i.abcnewsfe.com/a/0a1c6627-6fdd-4cc3-8edf-d80790509c5a/emoji-1-abc-221220_1671573538915_hpEmbed_1x1.jpg" alt="Profile" className="w-10 h-10 rounded-full object-cover" />
+            <div onClick={() => setShowDropdown(!showDropdown)} className="flex items-center gap-[10px] px-4 py-2 border border-[#ccc] rounded-[20px] bg-black cursor-pointer font-bold text-[16px] min-w-[100px] text-white">
               Student Name <i className="bi bi-caret-down-fill"></i>
             </div>
             {showDropdown && (
-              <div style={{ position: 'absolute', top: '100%', right: 0, background: '#fff', border: '1px solid #ccc', borderRadius: 10, boxShadow: '0 4px 8px rgba(0,0,0,0.1)', zIndex: 99, minWidth: 180 }}>
-                <div onClick={() => navigate('/profile')} style={dropdownItemStyle}>View Profile</div>
-                <div onClick={() => alert('Settings')} style={dropdownItemStyle}>Settings</div>
+              <div className="absolute top-full right-0 bg-white border border-[#ccc] rounded-[10px] shadow z-[99] min-w-[180px]">
+                <div onClick={() => navigate('/profile')} className={dropdownItemClass}>View Profile</div>
+                <div onClick={() => alert('Settings')} className={dropdownItemClass}>Settings</div>
               </div>
             )}
           </div>
         </div>
 
-        <div style={{ display: 'flex', gap: 40, marginBottom: 40 }}>
+        <div className="flex gap-10 mb-10">
           {summaryData.map((item) => (
-            <div key={item.label} style={{ flex: 1, background: item.color, borderRadius: 18, padding: '40px 0', textAlign: 'center', boxShadow: '0 4px 16px rgba(0,0,0,0.06)', minWidth: 180 }}>
-              <div style={{ fontSize: 64, fontWeight: 700 }}>{item.value}</div>
-              <div style={{ fontSize: 22, fontWeight: 600, marginTop: 10 }}>{item.label}</div>
+            <div key={item.label} className="flex-1 rounded-[18px] py-10 text-center shadow min-w-[180px]" style={{ background: item.color }}>
+              <div className="text-[64px] font-bold">{item.value}</div>
+              <div className="text-[22px] font-semibold mt-2.5">{item.label}</div>
             </div>
           ))}
         </div>
 
-        <div style={{ display: 'flex', gap: 40, marginBottom: 40 }}>
-          <div style={{ flex: 2, background: '#fff', borderRadius: 16, boxShadow: '0 4px 16px rgba(0,0,0,0.06)', padding: 36, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="flex gap-10 mb-10">
+          <div className="flex-[2] bg-white rounded-[16px] shadow p-9 flex flex-col items-center justify-center">
             <Pie
               data={{
                 labels: summaryData.map((d) => d.label),
@@ -141,41 +134,41 @@ const Dashboard = () => {
               style={{ maxWidth: 280, maxHeight: 280 }}
             />
           </div>
-          <div style={{ flex: 1, background: '#fff', borderRadius: 16, boxShadow: '0 4px 16px rgba(0,0,0,0.06)', padding: 36, minHeight: 280 }}>
-            <h3 style={{ fontWeight: 800, fontSize: 26, margin: 0, marginBottom: 20, color: '#23225c' }}>POLICY</h3>
-            <ul style={{ paddingLeft: 22, fontSize: 18, margin: 0, marginBottom: 20, color: '#23225c' }}>
+          <div className="flex-1 bg-white rounded-[16px] shadow p-9 min-h-[280px]">
+            <h3 className="font-extrabold text-[26px] m-0 mb-5 text-[#23225c]">POLICY</h3>
+            <ul className="pl-[22px] text-[18px] m-0 mb-5 text-[#23225c] list-disc">
               <li>3 Lates = 1 Absent</li>
               <li>3 Consecutive Absent = D/F</li>
             </ul>
-            <div style={{ fontStyle: 'italic', color: '#444', fontSize: 16 }}>
+            <div className="italic text-[#444] text-[16px]">
               Student must have follow the rules, the participation of the students will reflect their performance.
             </div>
           </div>
         </div>
 
-        <div style={{ background: '#fff', borderRadius: 16, boxShadow: '0 4px 16px rgba(0, 0, 0, 0.06)', padding: 36 }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 17 }}>
+        <div className="bg-white rounded-[16px] shadow p-9">
+          <table className="w-full border-collapse text-[17px]">
             <thead>
-              <tr style={{ background: '#EFEFFB', textAlign: 'left', borderBottom: '2px solid #ddd' }}>
-                <th style={thStyle}>GROUP</th>
-                <th style={thStyle}>MEETING CODE</th>
-                <th style={thStyle}>SESSION START TIME</th>
-                <th style={thStyle}>SESSION END TIME</th>
-                <th style={thStyle}>DURATION</th>
-                <th style={thStyle}>DATE</th>
-                <th style={thStyle}>STATUS</th>
+              <tr className="bg-[#EFEFFB] text-left border-b-2 border-[#ddd]">
+                <th className="px-5 py-4 font-extrabold text-[18px] tracking-[0.5px] text-[#23225c]">GROUP</th>
+                <th className="px-5 py-4 font-extrabold text-[18px] tracking-[0.5px] text-[#23225c]">MEETING CODE</th>
+                <th className="px-5 py-4 font-extrabold text-[18px] tracking-[0.5px] text-[#23225c]">SESSION START TIME</th>
+                <th className="px-5 py-4 font-extrabold text-[18px] tracking-[0.5px] text-[#23225c]">SESSION END TIME</th>
+                <th className="px-5 py-4 font-extrabold text-[18px] tracking-[0.5px] text-[#23225c]">DURATION</th>
+                <th className="px-5 py-4 font-extrabold text-[18px] tracking-[0.5px] text-[#23225c]">DATE</th>
+                <th className="px-5 py-4 font-extrabold text-[18px] tracking-[0.5px] text-[#23225c]">STATUS</th>
               </tr>
             </thead>
             <tbody>
               {attendanceData.map((row, idx) => (
-                <tr key={idx} style={{ borderBottom: '1px solid #e0e0e0', background: idx % 2 === 0 ? '#f9f9f9' : '#fff' }}>
-                  <td style={tdStyle}>{row.group}</td>
-                  <td style={tdStyle}>{row.code}</td>
-                  <td style={tdStyle}>{row.start}</td>
-                  <td style={tdStyle}>{row.end}</td>
-                  <td style={tdStyle}>{row.duration}</td>
-                  <td style={tdStyle}>{row.date}</td>
-                  <td style={{ ...tdStyle, color: statusColor(row.status), fontWeight: 700 }}>{row.status}</td>
+                <tr key={idx} className="border-b border-[#e0e0e0] odd:bg-[#f9f9f9]">
+                  <td className="px-5 py-4 font-semibold text-[#333] align-middle">{row.group}</td>
+                  <td className="px-5 py-4 font-semibold text-[#333] align-middle">{row.code}</td>
+                  <td className="px-5 py-4 font-semibold text-[#333] align-middle">{row.start}</td>
+                  <td className="px-5 py-4 font-semibold text-[#333] align-middle">{row.end}</td>
+                  <td className="px-5 py-4 font-semibold text-[#333] align-middle">{row.duration}</td>
+                  <td className="px-5 py-4 font-semibold text-[#333] align-middle">{row.date}</td>
+                  <td className={`px-5 py-4 font-bold align-middle ${statusClass(row.status)}`}>{row.status}</td>
                 </tr>
               ))}
             </tbody>
@@ -190,53 +183,22 @@ const SidebarItem = ({ icon, label, path, isActive, isLast, onClick }) => {
   const [hover, setHover] = React.useState(false);
   return (
     <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        padding: '18px 38px',
-        cursor: 'pointer',
-        fontWeight: 600,
-        fontSize: 20,
-        letterSpacing: 0.5,
-        background: isActive ? '#35348a' : hover ? '#35348a' : 'transparent',
-        marginBottom: isLast ? 0 : 12,
-        borderTopLeftRadius: 30,
-        borderBottomLeftRadius: 30,
-        transition: 'background 0.2s',
-      }}
+      className={`${(isActive || hover) ? 'bg-[#35348a]' : 'bg-transparent'} flex items-center px-[38px] py-[18px] cursor-pointer font-semibold text-[20px] tracking-[0.5px] ${isLast ? '' : 'mb-3'} rounded-tl-[30px] rounded-bl-[30px] transition-colors duration-200`}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       onClick={onClick}
     >
-      <i className={`bi ${icon}`} style={{ fontSize: 26, color: '#fff', marginRight: 22 }}></i>
-      <span style={{ fontStyle: 'italic', color: '#fff', letterSpacing: 1 }}>{label}</span>
+      <i className={`bi ${icon} text-[26px] text-white mr-[22px]`}></i>
+      <span className="italic text-white tracking-[1px]">{label}</span>
     </div>
   );
 };
 
-const thStyle = {
-  padding: '16px 20px',
-  fontWeight: 800,
-  fontSize: 18,
-  letterSpacing: 0.5,
-  background: '#EFEFFB',
-  color: '#23225c',
-  borderBottom: '2px solid #ddd',
-};
-
-const tdStyle = {
-  padding: '16px 20px',
-  fontWeight: 600,
-  color: '#333',
-  fontSize: 17,
-  verticalAlign: 'middle',
-};
-
-function statusColor(status) {
-  if (status === 'Present') return '#2ecc40';
-  if (status === 'Absent') return '#ff4136';
-  if (status === 'Late') return '#ffb700';
-  return '#888';
+function statusClass(status) {
+  if (status === 'Present') return 'text-[#2ecc40]';
+  if (status === 'Absent') return 'text-[#ff4136]';
+  if (status === 'Late') return 'text-[#ffb700]';
+  return 'text-[#888]';
 }
 
 export default Dashboard;

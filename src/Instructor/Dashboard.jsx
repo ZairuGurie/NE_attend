@@ -81,24 +81,16 @@ const Dashboard2 = () => {
     return matchesDate && matchesName;
   });
 
-  const dropdownItemStyle = {
-    padding: '10px 16px',
-    cursor: 'pointer',
-    fontSize: 15,
-    color: '#23225c',
-    fontWeight: 500,
-    borderBottom: '1px solid #eee',
-    background: '#fff',
-  };
+  const dropdownItemClass = 'px-4 py-2 cursor-pointer text-[15px] text-[#23225c] font-medium border-b border-[#eee] bg-white';
 
   return (
-    <div style={{ display: 'flex', width: '100vw', height: '100vh', background: '#f4f6fb', fontFamily: 'Segoe UI, sans-serif' }}>
+    <div className="flex w-screen h-screen bg-[#f4f6fb] font-sans">
       {/* Sidebar */}
-      <aside style={{ width: 290, background: '#201B51', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '40px 0', boxShadow: '2px 0 16px rgba(44,44,84,0.08)', height: '100vh' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 60 }}>
-          <img src={logo} alt="Logo" style={{ width: 300, height: 200, objectFit: 'contain', borderRadius: 18, boxShadow: '0 2px 8px rgba(0,0,0,0.10)' }} />
+      <aside className="w-[290px] bg-[#201B51] text-white flex flex-col items-center py-10 shadow-[2px_0_16px_rgba(44,44,84,0.08)] h-screen">
+        <div className="flex flex-col items-center mb-[60px]">
+          <img src={logo} alt="Logo" className="w-[300px] h-[200px] object-contain rounded-[18px] shadow" />
         </div>
-        <nav style={{ width: '100%' }}>
+        <nav className="w-full">
           {navItems.map((item, idx) => (
             <SidebarItem
               key={item.label}
@@ -114,38 +106,22 @@ const Dashboard2 = () => {
       </aside>
 
       {/* Main */}
-      <main style={{ flex: 1, padding: '48px 60px', overflowY: 'auto' }}>
+      <main className="flex-1 px-[60px] py-12 overflow-y-auto">
         {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 36 }}>
-          <h2 style={{ margin: 0, fontWeight: 800, fontSize: 36, color: '#23225c' }}>DASHBOARD</h2>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, position: 'relative' }}>
-            <div style={{ position: 'relative' }}>
+        <div className="flex justify-between items-center mb-9">
+          <h2 className="m-0 font-extrabold text-[36px] text-[#23225c]">DASHBOARD</h2>
+          <div className="flex items-center gap-[14px] relative">
+            <div className="relative">
               <i
-                className="bi bi-bell-fill"
-                style={{ fontSize: 22, color: '#23225c', cursor: 'pointer' }}
+                className="bi bi-bell-fill text-[22px] text-[#23225c] cursor-pointer"
                 onClick={() => setShowNotifications(!showNotifications)}
               />
               {showNotifications && (
-                <div style={{
-                  position: 'absolute',
-                  right: 0,
-                  top: '130%',
-                  background: '#fff',
-                  border: '1px solid #ccc',
-                  borderRadius: 10,
-                  boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                  zIndex: 100,
-                  minWidth: 250
-                }}>
+                <div className="absolute right-0 top-[130%] bg-white border border-[#ccc] rounded-[10px] shadow z-[100] min-w-[250px]">
                   {notificationItems.map((note, idx) => (
                     <div
                       key={idx}
-                      style={{
-                        padding: '10px 16px',
-                        fontSize: 14,
-                        color: '#23225c',
-                        borderBottom: '1px solid #eee'
-                      }}
+                      className="px-4 py-2 text-sm text-[#23225c] border-b border-[#eee]"
                     >
                       {note}
                     </div>
@@ -156,108 +132,83 @@ const Dashboard2 = () => {
             <img
               src="https://i.abcnewsfe.com/a/0a1c6627-6fdd-4cc3-8edf-d80790509c5a/emoji-1-abc-221220_1671573538915_hpEmbed_1x1.jpg"
               alt="Profile"
-              style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover' }}
+              className="w-10 h-10 rounded-full object-cover"
             />
             <div
               onClick={() => setShowDropdown(!showDropdown)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 10,
-                padding: '8px 16px',
-                border: '1px solid #ccc',
-                borderRadius: 20,
-                background: 'black',
-                cursor: 'pointer',
-                fontWeight: 700,
-                fontSize: 16,
-                minWidth: 100,
-                color: '#fff'
-              }}
+              className="flex items-center gap-[10px] px-4 py-2 border border-[#ccc] rounded-[20px] bg-black cursor-pointer font-bold text-[16px] min-w-[100px] text-white"
             >
               Instructor Name <i className="bi bi-caret-down-fill" />
             </div>
             {showDropdown && (
-              <div style={{
-                position: 'absolute',
-                top: '100%',
-                right: 0,
-                background: '#fff',
-                border: '1px solid #ccc',
-                borderRadius: 10,
-                boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                zIndex: 99,
-                minWidth: 180
-              }}>
-                <div onClick={() => navigate('/I_Profile')} style={dropdownItemStyle}>View Profile</div>
-                <div onClick={() => alert('Settings')} style={dropdownItemStyle}>Settings</div>
+              <div className="absolute top-full right-0 bg-white border border-[#ccc] rounded-[10px] shadow z-[99] min-w-[180px]">
+                <div onClick={() => navigate('/I_Profile')} className={dropdownItemClass}>View Profile</div>
+                <div onClick={() => alert('Settings')} className={dropdownItemClass}>Settings</div>
               </div>
             )}
           </div>
         </div>
 
         {/* Table Section */}
-        <div style={{ background: '#fff', borderRadius: 16, boxShadow: '0 4px 16px rgba(0,0,0,0.06)', padding: 36, marginBottom: 30 }}>
-          <h3 style={{ fontWeight: 800, fontSize: 26, marginBottom: 20, color: '#23225c' }}>REAL-TIME MEETING STATUS</h3>
+        <div className="bg-white rounded-[16px] shadow p-9 mb-[30px]">
+          <h3 className="font-extrabold text-[26px] mb-5 text-[#23225c]">REAL-TIME MEETING STATUS</h3>
 
           {/* Professional Filters */}
-          <div style={{ display: 'flex', gap: 20, marginBottom: 20, alignItems: 'center' }}>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <label style={{ fontWeight: 600, fontSize: 14, marginBottom: 6 }}>Filter by Date</label>
+          <div className="flex gap-5 mb-5 items-center">
+            <div className="flex flex-col">
+              <label className="font-semibold text-[14px] mb-1.5 text-[#23225c]">Filter by Date</label>
               <input
                 type="date"
                 value={filterDate}
                 onChange={(e) => setFilterDate(e.target.value)}
-                style={{ padding: '8px 12px', borderRadius: 6, border: '1px solid #ccc', fontSize: 15 }}
+                className="px-3 py-2 rounded border border-[#ccc] text-[15px] text-[#23225c]"
               />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <label style={{ fontWeight: 600, fontSize: 14, marginBottom: 6 }}>Filter by Student</label>
+            <div className="flex flex-col">
+              <label className="font-semibold text-[14px] mb-1.5 text-[#23225c]">Filter by Student</label>
               <input
                 type="text"
                 placeholder="Enter student name..."
                 value={filterName}
                 onChange={(e) => setFilterName(e.target.value)}
-                style={{ padding: '8px 12px', borderRadius: 6, border: '1px solid #ccc', fontSize: 15 }}
+                className="px-3 py-2 rounded border border-[#ccc] text-[15px] text-[#23225c]"
               />
             </div>
           </div>
 
           {/* Table */}
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 17 }}>
+          <table className="w-full border-collapse text-[17px]">
             <thead>
-              <tr style={{ background: '#EFEFFB', textAlign: 'left', borderBottom: '2px solid #ddd' }}>
-                <th style={thStyle}>GROUP</th>
-                <th style={thStyle}>DATE</th>
-                <th style={thStyle}>CODELINK</th>
-                <th style={thStyle}>STUDENT ID</th>
-                <th style={thStyle}>STUDENT NAME</th>
-                <th style={thStyle}>TIME IN</th>
-                <th style={thStyle}>TIME OUT</th>
-                <th style={thStyle}>DURATION</th>
-                <th style={thStyle}>LOG</th>
+              <tr className="bg-[#EFEFFB] text-left border-b-2 border-[#ddd]">
+                <th className="px-5 py-4 font-extrabold text-[18px] text-[#23225c]">GROUP</th>
+                <th className="px-5 py-4 font-extrabold text-[18px] text-[#23225c]">DATE</th>
+                <th className="px-5 py-4 font-extrabold text-[18px] text-[#23225c]">CODELINK</th>
+                <th className="px-5 py-4 font-extrabold text-[18px] text-[#23225c]">STUDENT ID</th>
+                <th className="px-5 py-4 font-extrabold text-[18px] text-[#23225c]">STUDENT NAME</th>
+                <th className="px-5 py-4 font-extrabold text-[18px] text-[#23225c]">TIME IN</th>
+                <th className="px-5 py-4 font-extrabold text-[18px] text-[#23225c]">TIME OUT</th>
+                <th className="px-5 py-4 font-extrabold text-[18px] text-[#23225c]">DURATION</th>
+                <th className="px-5 py-4 font-extrabold text-[18px] text-[#23225c]">LOG</th>
               </tr>
             </thead>
             <tbody>
               {filteredData.length > 0 ? (
                 filteredData.map((row, idx) => (
-                  <tr key={idx} style={{ borderBottom: '1px solid #e0e0e0', background: idx % 2 === 0 ? '#f9f9f9' : '#fff' }}>
-                    <td style={tdStyle}>{row.group}</td>
-                    <td style={tdStyle}>{row.date}</td>
-                    <td style={tdStyle}>{row.codelink}</td>
-                    <td style={tdStyle}>{row.studentId}</td>
-                    <td style={tdStyle}>{row.name}</td>
-                    <td style={tdStyle}>{row.timeIn}</td>
-                    <td style={tdStyle}>{row.timeOut}</td>
-                    <td style={tdStyle}>{row.duration}</td>
-                    <td style={{ ...tdStyle, color: statusColor(row.log), fontWeight: 700 }}>{row.log}</td>
+                  <tr key={idx} className="border-b border-[#e0e0e0] odd:bg-[#f9f9f9]">
+                    <td className="px-5 py-4 font-semibold text-[#333]">{row.group}</td>
+                    <td className="px-5 py-4 font-semibold text-[#333]">{row.date}</td>
+                    <td className="px-5 py-4 font-semibold text-[#333]">{row.codelink}</td>
+                    <td className="px-5 py-4 font-semibold text-[#333]">{row.studentId}</td>
+                    <td className="px-5 py-4 font-semibold text-[#333]">{row.name}</td>
+                    <td className="px-5 py-4 font-semibold text-[#333]">{row.timeIn}</td>
+                    <td className="px-5 py-4 font-semibold text-[#333]">{row.timeOut}</td>
+                    <td className="px-5 py-4 font-semibold text-[#333]">{row.duration}</td>
+                    <td className={`px-5 py-4 font-bold ${statusClass(row.log)}`}>{row.log}</td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="9" style={{ textAlign: 'center', padding: 20, color: '#888' }}>
-                    No records found.
-                  </td>
+                  <td colSpan="9" className="text-center p-5 text-[#888]">No records found.</td>
                 </tr>
               )}
             </tbody>
@@ -265,15 +216,13 @@ const Dashboard2 = () => {
         </div>
 
         {/* Policy Section (below table) */}
-        <div style={{ background: '#fff', borderRadius: 16, boxShadow: '0 4px 16px rgba(0,0,0,0.06)', padding: 36 }}>
-          <h3 style={{ fontWeight: 800, fontSize: 26, marginBottom: 20, color: '#23225c' }}>POLICY</h3>
-          <ul style={{ paddingLeft: 22, fontSize: 18, marginBottom: 20, color: '#23225c' }}>
+        <div className="bg-white rounded-[16px] shadow p-9">
+          <h3 className="font-extrabold text-[26px] mb-5 text-[#23225c]">POLICY</h3>
+          <ul className="pl-[22px] text-[18px] mb-5 text-[#23225c] list-disc">
             <li>3 Lates = 1 Absent</li>
             <li>3 Consecutive Absents = D/F</li>
           </ul>
-          <div style={{ fontStyle: 'italic', color: '#444', fontSize: 16 }}>
-            Students must follow the rules. Participation will reflect their performance.
-          </div>
+          <div className="italic text-[#444] text-[16px]">Students must follow the rules. Participation will reflect their performance.</div>
         </div>
       </main>
     </div>
@@ -284,50 +233,22 @@ const SidebarItem = ({ icon, label, isActive, isLast, onClick }) => {
   const [hover, setHover] = useState(false);
   return (
     <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        padding: '18px 38px',
-        cursor: 'pointer',
-        fontWeight: 600,
-        fontSize: 20,
-        background: isActive ? '#35348a' : hover ? '#35348a' : 'transparent',
-        marginBottom: isLast ? 0 : 12,
-        borderTopLeftRadius: 30,
-        borderBottomLeftRadius: 30,
-        transition: 'background 0.2s',
-      }}
+      className={`${(isActive || hover) ? 'bg-[#35348a]' : 'bg-transparent'} flex items-center px-[38px] py-[18px] cursor-pointer font-semibold text-[20px] ${isLast ? '' : 'mb-3'} rounded-tl-[30px] rounded-bl-[30px] transition-colors`}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       onClick={onClick}
     >
-      <i className={`bi ${icon}`} style={{ fontSize: 26, color: '#fff', marginRight: 22 }}></i>
-      <span style={{ fontStyle: 'italic', color: '#fff' }}>{label}</span>
+      <i className={`bi ${icon} text-[26px] text-white mr-[22px]`}></i>
+      <span className="italic text-white">{label}</span>
     </div>
   );
 };
 
-const thStyle = {
-  padding: '16px 20px',
-  fontWeight: 800,
-  fontSize: 18,
-  background: '#EFEFFB',
-  color: '#23225c',
-  borderBottom: '2px solid #ddd',
-};
-
-const tdStyle = {
-  padding: '16px 20px',
-  fontWeight: 600,
-  color: '#333',
-  fontSize: 17,
-};
-
-function statusColor(status) {
-  if (status === 'Present') return '#2ecc40';
-  if (status === 'Absent') return '#ff4136';
-  if (status === 'Late') return '#ffb700';
-  return '#888';
+function statusClass(status) {
+  if (status === 'Present') return 'text-[#2ecc40]';
+  if (status === 'Absent') return 'text-[#ff4136]';
+  if (status === 'Late') return 'text-[#ffb700]';
+  return 'text-[#888]';
 }
 
 export default Dashboard2;

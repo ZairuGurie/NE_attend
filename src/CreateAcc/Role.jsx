@@ -1,66 +1,52 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Role = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { firstName, lastName, email } = location.state || {};
   const [role, setRole] = useState('');
 
   const handleBack = () => {
     navigate(-1);
   };
 
-const handleNext = async (e) => {
-  e.preventDefault();
-  if (!role) {
-    alert('Please select a Role.');
-    return;
-  }
-
-  try {
-    const user_id = localStorage.getItem("user_id");
-    if (!user_id) {
-      alert("User ID is missing. Please restart the registration.");
+  const handleNext = (e) => {
+    e.preventDefault();
+    if (!role) {
+      alert('Please select a Role.');
       return;
     }
 
-    const res = await fetch("http://localhost/NE_ATTEND/Backend/update_role.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ user_id, role }),
+    // No backend — just navigate and carry forward the data
+    navigate('/role/dep-course', {
+      state: { firstName, lastName, email, role },
     });
-
-    const data = await res.json();
-    console.log(data);
-
-    if (data.message) {
-      navigate('/role/dep-course'); // proceed to next step
-    } else {
-      alert(data.error || "Something went wrong");
-    }
-  } catch (err) {
-    console.error("Error:", err);
-    alert("Server error");
-  }
-};
-
+  };
 
   return (
-    <div style={styles.screen}>
-      <div style={styles.title}>CREATE ACCOUNT</div>
+    <div className="min-h-screen w-screen flex items-center justify-center bg-white relative box-border">
+      <div className="absolute top-[200px] left-1/2 -translate-x-1/2 text-[28px]">
+        CREATE ACCOUNT
+      </div>
 
-      <button aria-label="Go back" onClick={handleBack} style={styles.backBtn}>
-        <span style={{ fontSize: 50 }}>←</span>
+      <button 
+        aria-label="Go back" 
+        onClick={handleBack} 
+        className="absolute  top-[92px] left-[14%] text-black"
+      >
+        <span className="text-[50px]">←</span>
       </button>
 
-      <div style={styles.card}>
-        <form onSubmit={handleNext} style={styles.form}>
+      <div className="w-[640px] max-w-[92vw] bg-[#201B51] rounded-[16px] px-12 py-10 shadow-[0_12px_32px_rgba(0,0,0,0.10)] text-white">
+        <form onSubmit={handleNext} className="w-full">
           {/* Role Selection */}
-          <div style={styles.fieldGroup}>
-            <label style={styles.label}>Role</label>
+          <div className="flex flex-col">
+            <label className="text-[14px] italic text-[#d7d8ff] mb-[10px]">Role</label>
             <select
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              style={styles.input}
+              className="w-[99%] h-12 rounded-[14px] border-0 outline-none px-4 text-[16px] bg-white text-[#111]"
               required
             >
               <option value="">-- Select Role --</option>
@@ -70,103 +56,19 @@ const handleNext = async (e) => {
             </select>
           </div>
 
-          <div style={styles.actionsRow}>
-            <button type="submit" style={styles.nextBtn}>
-              <span style={{ marginRight: 12, fontWeight: 700 }}>NEXT</span>
-              <span style={{ fontSize: 18 }}>→</span>
+          <div className="flex justify-end mt-7">
+            <button
+              type="submit"
+              className="inline-flex items-center justify-center px-[22px] py-3 rounded-[22px] border-0 bg-black text-white font-bold tracking-[0.4px] shadow-[0_6px_16px_rgba(16,185,129,0.35)]"
+            >
+              <span className="mr-3 font-bold">NEXT</span>
+              <span className="text-[18px]">→</span>
             </button>
           </div>
         </form>
       </div>
     </div>
   );
-};
-
-const styles = {
-  screen: {
-    minHeight: '100vh',
-    width: '100vw',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: '#ffffff',
-    paddingTop: 0,
-    position: 'relative',
-    boxSizing: 'border-box'
-  },
-  title: {
-    position: 'absolute',
-    top: 200,
-    left: '50%',
-    transform: 'translateX(-50%)',
-    fontSize: 28,
-    fontWeight: 800,
-    letterSpacing: 0.6,
-    color: '#111',
-    fontFamily: 'Segoe UI, Arial, sans-serif'
-  },
-  backBtn: {
-    position: 'absolute',
-    top: 92,
-    left: '14%',
-    borderRadius: 8,
-    border: 'none',
-    background: 'transparent',
-    color: '#111',
-    cursor: 'pointer',
-  },
-  card: {
-    width: 640,
-    maxWidth: '92vw',
-    background: '#201B51',
-    borderRadius: 16,
-    padding: '40px 48px',
-    boxShadow: '0 12px 32px rgba(0,0,0,0.10)',
-    color: '#fff'
-  },
-  form: {
-    width: '100%'
-  },
-  fieldGroup: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  label: {
-    fontSize: 14,
-    fontStyle: 'italic',
-    color: '#d7d8ff',
-    marginBottom: 10
-  },
-  input: {
-    width: '99%',
-    height: 48,
-    borderRadius: 14,
-    border: 'none',
-    outline: 'none',
-    padding: '0 16px',
-    fontSize: 16,
-    background: '#ffffff',
-    color: '#111'
-  },
-  actionsRow: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    marginTop: 28
-  },
-  nextBtn: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '12px 22px',
-    borderRadius: 22,
-    border: 'none',
-    background: '#10b981',
-    color: '#ffffff',
-    fontWeight: 700,
-    letterSpacing: 0.4,
-    cursor: 'pointer',
-    boxShadow: '0 6px 16px rgba(16,185,129,0.35)',
-  }
 };
 
 export default Role;

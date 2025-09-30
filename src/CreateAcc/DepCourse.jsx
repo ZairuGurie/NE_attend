@@ -1,86 +1,71 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // ✅ import navigate hook
 
 const DepCourse = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // ✅ initialize navigate
+
+  const [firstName] = useState('John');
+  const [lastName] = useState('Doe');
+  const [email] = useState('john.doe@example.com');
+  const [role] = useState('Student');
   const [department, setDepartment] = useState('');
   const [course, setCourse] = useState('');
 
   const handleBack = () => {
-    navigate(-1);
+    navigate(-1); // ✅ use navigate instead of window.history.back()
   };
 
-  const handleNext = async (e) => {
+  const handleNext = (e) => {
     e.preventDefault();
     if (!department || !course) {
       alert('Please select both Department and Course.');
       return;
     }
 
-    try {
-      const user_id = localStorage.getItem("user_id");
-      if (!user_id) {
-        alert("User ID is missing. Please restart the registration.");
-        return;
-      }
+    // Simulate saving and navigation
+    console.log('Proceeding to next step with data:', {
+      firstName,
+      lastName,
+      email,
+      role,
+      department,
+      course,
+    });
 
-      // Map department names to IDs
-      const deptMap = {
-        "Engineering": 1,
-        "Computer Studies": 2,
-        "Business Administration": 3,
-        "Education": 4
-      };
+    alert(`Data saved:\nName: ${firstName} ${lastName}\nEmail: ${email}\nRole: ${role}\nDepartment: ${department}\nCourse: ${course}`);
 
-      // Map course names to IDs
-      const courseMap = {
-        "BSIT": 1,
-        "BSCS": 2,
-        "BSECE": 3,
-        "BSBA": 4,
-        "BSEd": 5
-      };
-
-      const department_id = deptMap[department];
-      const course_id = courseMap[course];
-
-      const res = await fetch("http://localhost/NE_ATTEND/Backend/update_department_course.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id, department_id, course_id }),
-      });
-
-      const data = await res.json();
-      console.log(data);
-
-      if (data.message) {
-        navigate('/dep-course/onlyid'); // go to Email step
-      } else {
-        alert(data.error || "Something went wrong");
-      }
-    } catch (err) {
-      console.error("Error:", err);
-      alert("Server error");
-    }
+    navigate('/dep-course/onlyid'); // ✅ navigation works now
   };
 
   return (
-    <div style={styles.screen}>
-      <div style={styles.title}>CREATE ACCOUNT</div>
+    <div className="min-h-screen w-screen flex items-center justify-center bg-white pt-0 relative box-border">
+      <div 
+        className="absolute top-[200px] left-1/2 -translate-x-1/2 text-[28px] font-extrabold text-[#111]"
+        style={{ letterSpacing: '0.6px', fontFamily: 'Segoe UI, Arial, sans-serif' }}
+      >
+        CREATE ACCOUNT
+      </div>
 
-      <button aria-label="Go back" onClick={handleBack} style={styles.backBtn}>
-        <span style={{ fontSize: 50 }}>←</span>
+      <button 
+        aria-label="Go back" 
+        onClick={handleBack} 
+        className="absolute  top-[92px] left-[14%] text-black"
+      >
+        <span className="text-[50px]">←</span>
       </button>
 
-      <div style={styles.card}>
-        <form onSubmit={handleNext} style={styles.form}>
+      <div 
+        className="w-[640px] max-w-[92vw] bg-[#201B51] rounded-2xl px-12 py-10 text-white"
+        style={{ boxShadow: '0 12px 32px rgba(0,0,0,0.10)' }}
+      >
+        <form onSubmit={handleNext} className="w-full">
           {/* Department Selection */}
-          <div style={styles.fieldGroup}>
-            <label style={styles.label}>Department</label>
+          <div className="flex flex-col">
+            <label className="text-sm italic text-[#d7d8ff] mb-2.5">Department</label>
             <select
               value={department}
               onChange={(e) => setDepartment(e.target.value)}
-              style={styles.input}
+              className="w-[99%] h-12 rounded-[14px] border-none outline-none px-4 text-base bg-white text-[#111]"
               required
             >
               <option value="">-- Select Department --</option>
@@ -91,15 +76,15 @@ const DepCourse = () => {
             </select>
           </div>
 
-          <div style={{ height: 18 }} />
+          <div className="h-[18px]" />
 
           {/* Course Selection */}
-          <div style={styles.fieldGroup}>
-            <label style={styles.label}>Course</label>
+          <div className="flex flex-col">
+            <label className="text-sm italic text-[#d7d8ff] mb-2.5">Course</label>
             <select
               value={course}
               onChange={(e) => setCourse(e.target.value)}
-              style={styles.input}
+              className="w-[99%] h-12 rounded-[14px] border-none outline-none px-4 text-base bg-white text-[#111]"
               required
             >
               <option value="">-- Select Course --</option>
@@ -111,103 +96,20 @@ const DepCourse = () => {
             </select>
           </div>
 
-          <div style={styles.actionsRow}>
-            <button type="submit" style={styles.nextBtn}>
-              <span style={{ marginRight: 12, fontWeight: 700 }}>NEXT</span>
-              <span style={{ fontSize: 18 }}>→</span>
+          <div className="flex justify-end mt-7">
+            <button 
+              type="submit" 
+              className="inline-flex items-center justify-center px-6 py-3 rounded-[22px] border-none bg-black text-white font-bold cursor-pointer"
+              style={{ letterSpacing: '0.4px', boxShadow: '0 6px 16px rgba(16,185,129,0.35)' }}
+            >
+              <span className="mr-3 font-bold">NEXT</span>
+              <span className="text-lg">→</span>
             </button>
           </div>
         </form>
       </div>
     </div>
   );
-};
-
-const styles = {
-  screen: {
-    minHeight: '100vh',
-    width: '100vw',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: '#ffffff',
-    paddingTop: 0,
-    position: 'relative',
-    boxSizing: 'border-box'
-  },
-  title: {
-    position: 'absolute',
-    top: 200,
-    left: '50%',
-    transform: 'translateX(-50%)',
-    fontSize: 28,
-    fontWeight: 800,
-    letterSpacing: 0.6,
-    color: '#111',
-    fontFamily: 'Segoe UI, Arial, sans-serif'
-  },
-  backBtn: {
-    position: 'absolute',
-    top: 92,
-    left: '14%',
-    borderRadius: 8,
-    border: 'none',
-    background: 'transparent',
-    color: '#111',
-    cursor: 'pointer',
-  },
-  card: {
-    width: 640,
-    maxWidth: '92vw',
-    background: '#201B51',
-    borderRadius: 16,
-    padding: '40px 48px',
-    boxShadow: '0 12px 32px rgba(0,0,0,0.10)',
-    color: '#fff'
-  },
-  form: {
-    width: '100%'
-  },
-  fieldGroup: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  label: {
-    fontSize: 14,
-    fontStyle: 'italic',
-    color: '#d7d8ff',
-    marginBottom: 10
-  },
-  input: {
-    width: '99%',
-    height: 48,
-    borderRadius: 14,
-    border: 'none',
-    outline: 'none',
-    padding: '0 16px',
-    fontSize: 16,
-    background: '#ffffff',
-    color: '#111'
-  },
-  actionsRow: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    marginTop: 28
-  },
-  nextBtn: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '12px 22px',
-    borderRadius: 22,
-    border: 'none',
-    background: '#10b981',
-    color: '#ffffff',
-    fontWeight: 700,
-    letterSpacing: 0.4,
-    cursor: 'pointer',
-    boxShadow: '0 6px 16px rgba(16,185,129,0.35)',
-  }
 };
 
 export default DepCourse;

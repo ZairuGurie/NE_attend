@@ -41,48 +41,48 @@ const CreateGroup = () => {
   };
 
   return (
-    <div style={styles.modalOverlay}>
-      <div style={styles.modalContent}>
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000]">
+      <div className="bg-white rounded-[16px] w-[90%] max-w-[800px] max-h-[90vh] overflow-y-auto px-10 py-8">
         {/* Header */}
-        <div style={styles.header}>
-          <div style={styles.backButton} onClick={() => navigate('/Group2')}>
-            <i className="bi bi-arrow-left" style={{ fontSize: 24 }}></i>
+        <div className="flex items-center mb-8">
+          <div className="mr-6 text-[#23225c] cursor-pointer" onClick={() => navigate('/Group2')}>
+            <i className="bi bi-arrow-left text-[24px]"></i>
           </div>
-          <h2 style={styles.title}>GROUP</h2>
+          <h2 className="m-0 text-[28px] font-extrabold text-[#23225c]">GROUP</h2>
         </div>
 
         {/* Form */}
-        <div style={styles.formContainer}>
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>GROUP NAME</label>
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-2">
+            <label className="text-[14px] font-semibold text-[#23225c]">GROUP NAME</label>
             <input 
               type="text"
               name="groupName"
               value={formData.groupName}
               onChange={handleInputChange}
               placeholder="IT ELECTIVE"
-              style={styles.input}
+              className="px-4 py-3 rounded-lg border border-[#ddd] text-[16px] bg-white text-black"
             />
           </div>
 
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>TIME SCHEDULE</label>
+          <div className="flex flex-col gap-2">
+            <label className="text-[14px] font-semibold text-[#23225c]">TIME SCHEDULE</label>
             <input 
               type="time"
               name="timeSchedule"
               value={formData.timeSchedule}
               onChange={handleInputChange}
-              style={styles.input}
+              className="px-4 py-3 rounded-lg border border-[#ddd] text-[16px] bg-white text-black"
             />
           </div>
 
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>DAY</label>
+          <div className="flex flex-col gap-2">
+            <label className="text-[14px] font-semibold text-[#23225c]">DAY</label>
             <select 
               name="day"
               value={formData.day}
               onChange={handleInputChange}
-              style={styles.input}
+              className="px-4 py-3 rounded-lg border border-[#ddd] text-[16px] bg-white text-black"
             >
               <option value="">Select Day</option>
               <option value="monday">Monday</option>
@@ -93,73 +93,73 @@ const CreateGroup = () => {
             </select>
           </div>
 
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>MEETING LINK</label>
+          <div className="flex flex-col gap-2">
+            <label className="text-[14px] font-semibold text-[#23225c]">MEETING LINK</label>
             <input 
               type="text"
               name="meetingLink"
               value={formData.meetingLink}
               onChange={handleInputChange}
               placeholder="abc-defg-hijk"
-              style={styles.input}
+              className="px-4 py-3 rounded-lg border border-[#ddd] text-[16px] bg-white text-black"
             />
           </div>
 
-          <div style={styles.rowContainer}>
-            <div style={styles.halfWidth}>
-              <label style={styles.label}>LATE RULE TIME</label>
+          <div className="grid grid-cols-2 gap-6">
+            <div className="flex flex-col gap-2">
+              <label className="text-[14px] font-semibold text-[#23225c]">LATE RULE TIME</label>
               <select 
                 name="lateRuleTime"
                 value={formData.lateRuleTime}
                 onChange={handleInputChange}
-                style={styles.select}
+                className="px-4 py-3 rounded-lg border border-[#ddd] text-[16px] bg-white text-black"
               >
                 <option value="15">15 minutes</option>
                 <option value="30">30 minutes</option>
                 <option value="45">45 minutes</option>
               </select>
             </div>
-            <div style={styles.halfWidth}>
-              <label style={styles.label}>SECTION</label>
+            <div className="flex flex-col gap-2">
+              <label className="text-[14px] font-semibold text-[#23225c]">SECTION</label>
               <input 
                 type="text"
                 name="section"
                 value={formData.section}
                 onChange={handleInputChange}
                 placeholder="Section Name"
-                style={styles.input}
+                className="px-4 py-3 rounded-lg border border-[#ddd] text-[16px] bg-white text-black"
               />
             </div>
           </div>
 
-          <div style={styles.inputGroup}>
-            <div style={styles.memberHeader}>
-              <label style={styles.label}>MEMBER</label>
+          <div className="flex flex-col">
+            <div className="flex justify-between items-center mb-4">
+              <label className="text-[14px] font-semibold text-[#23225c]">MEMBER</label>
               <button 
                 type="button"
                 onClick={handleInvite}
-                style={styles.inviteButton}
+                className="bg-[#7CFC00] text-[#23225c] border-0 px-6 py-2 rounded-lg text-[15px] font-semibold"
               >
                 Invite
               </button>
             </div>
-            <div style={styles.memberList}>
+            <div className="border border-[#ddd] rounded-lg max-h-[200px] overflow-y-auto">
               {members.map((email, idx) => (
-                <div key={idx} style={styles.memberItem}>
-                  <div style={styles.memberAvatar}>
+                <div key={idx} className="px-4 py-3 flex items-center gap-3 border-b border-[#eee]">
+                  <div className="w-8 h-8 rounded-full bg-[#f0f0f0] flex items-center justify-center">
                     <i className="bi bi-person-fill"></i>
                   </div>
-                  <span style={styles.memberEmail}>{email}</span>
+                  <span className="text-[15px] text-black">{email}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div style={styles.buttonContainer}>
+          <div className="flex justify-end mt-8">
             <button
               type="button"
               onClick={handleCreateGroup}
-              style={styles.saveButton}
+              className="px-6 py-3 bg-[#23225c] text-white rounded-lg text-[15px] font-semibold"
             >
               Create Group/Save
             </button>
@@ -170,146 +170,5 @@ const CreateGroup = () => {
   );
 };
 
-const styles = {
-  modalOverlay: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 1000
-  },
-  modalContent: {
-    backgroundColor: '#fff',
-    borderRadius: 16,
-    width: '90%',
-    maxWidth: 800,
-    maxHeight: '90vh',
-    overflowY: 'auto',
-    padding: '32px 40px'
-  },
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-    marginBottom: 32
-  },
-  backButton: {
-    cursor: 'pointer',
-    marginRight: 24,
-    color: '#23225c'
-  },
-  title: {
-    margin: 0,
-    fontSize: 28,
-    fontWeight: 800,
-    color: '#23225c'
-  },
-  formContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 24
-  },
-  inputGroup: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 8
-  },
-  label: {
-    fontSize: 14,
-    fontWeight: 600,
-    color: '#23225c'
-  },
-  input: {
-    padding: '12px 16px',
-    borderRadius: 8,
-    border: '1px solid #ddd',
-    fontSize: 16,
-    backgroundColor: '#fff',
-    color: '#000000' // Changed to black
-  },
-  rowContainer: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    gap: 24
-  },
-  halfWidth: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 8
-  },
-  select: {
-    padding: '12px 16px',
-    borderRadius: 8,
-    border: '1px solid #ddd',
-    fontSize: 16,
-    backgroundColor: '#fff',
-    color: '#000000' // Changed to black
-  },
-  memberHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 16
-  },
-  inviteButton: {
-    backgroundColor: '#7CFC00',
-    color: '#23225c',
-    border: 'none',
-    padding: '8px 24px',
-    borderRadius: 8,
-    fontSize: 15,
-    fontWeight: 600,
-    cursor: 'pointer'
-  },
-  memberList: {
-    border: '1px solid #ddd',
-    borderRadius: 8,
-    maxHeight: 200,
-    overflowY: 'auto'
-  },
-  memberItem: {
-    padding: '12px 16px',
-    display: 'flex',
-    alignItems: 'center',
-    gap: 12,
-    borderBottom: '1px solid #eee'
-  },
-  memberAvatar: {
-    width: 32,
-    height: 32,
-    borderRadius: '50%',
-    backgroundColor: '#f0f0f0',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  memberEmail: {
-    fontSize: 15,
-    color: '#000000' // Changed to black
-  },
-  buttonContainer: {
-    display: 'flex',
-    justifyContent: 'flex-end', // Changed from space-between
-    marginTop: 32
-  },
-  rightButtons: {
-    display: 'flex',
-    gap: 16
-  },
-  saveButton: {
-    padding: '12px 24px',
-    backgroundColor: '#23225c',
-    color: '#fff',
-    border: 'none',
-    borderRadius: 8,
-    fontSize: 15,
-    fontWeight: 600,
-    cursor: 'pointer'
-  }
-};
 
 export default CreateGroup;
